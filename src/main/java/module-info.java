@@ -11,6 +11,9 @@ module com.example.qsync_2207097_desktop {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
 
+    requires java.sql;
     opens com.example.qsync_2207097_desktop to javafx.fxml;
     exports com.example.qsync_2207097_desktop;
+    exports com.example.qsync_2207097_desktop.controller;
+    opens com.example.qsync_2207097_desktop.controller to javafx.fxml;
 }

@@ -1,0 +1,94 @@
+/* Clean white background design - no gradients */
+
+.root {
+    -fx-background-color: #ffffff; /* white background */
+    -fx-padding: 28;
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+.header {
+    -fx-padding: 12 18 0 18;
+}
+
+.logo-btn {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.login-container {
+    -fx-alignment: center;
+    -fx-padding: 14 20 24 20;
+}
+
+.card {
+    -fx-background-color: #ffffff; /* white card on white page with subtle border/shadow */
+    -fx-background-insets: 0;
+    -fx-background-radius: 12;
+    -fx-padding: 18 22 18 22;
+    -fx-border-color: rgba(16,24,40,0.06);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.08), 18, 0.08, 0, 6);
+    -fx-max-width: 380px;
+    -fx-min-width: 260px;
+}
+
+.title {
+    -fx-text-fill: #0f1724; /* dark text */
+    -fx-font-size: 20px;
+    -fx-font-weight: 600;
+}
+
+.login-grid .label {
+    -fx-text-fill: rgba(15,23,36,0.85);
+    -fx-font-size: 12.5px;
+}
+
+.input {
+    -fx-background-color: #f3f4f6; /* light gray input */
+    -fx-text-fill: #0f1724;
+    -fx-prompt-text-fill: rgba(15,23,36,0.45);
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 8 10 8 10;
+    -fx-border-color: transparent;
+}
+
+.input:focused {
+    -fx-border-color: #7c3aed;
+    -fx-border-width: 1.5;
+}
+
+.login-btn {
+    -fx-background-radius: 10;
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-padding: 8 18 8 18;
+    -fx-background-color: #7c3aed; /* solid accent color, no gradient */
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(124,58,237,0.12), 8, 0.08, 0, 4);
+}
+
+.login-btn:hover {
+    -fx-opacity: 0.98;
+    -fx-translate-y: -1;
+}
+
+.muted {
+    -fx-text-fill: rgba(15,23,36,0.6);
+    -fx-font-size: 11px;
+    -fx-padding: 6 0 0 0;
+}
+
+/* hyperlink style for muted links */
+.muted-link {
+    -fx-text-fill: #7c3aed;
+    -fx-underline: true;
+    -fx-cursor: hand;
+    -fx-font-size: 12px;
+}
+.muted-link:hover {
+    -fx-opacity: 0.85;
+}
+
+/* Responsive: smaller card/padding on narrow widths handled via layout defaults - keep CSS simple */
