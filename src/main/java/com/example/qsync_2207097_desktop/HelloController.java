@@ -2,6 +2,7 @@ package com.example.qsync_2207097_desktop;
 
 import com.example.qsync_2207097_desktop.config.DatabaseConfig;
 import com.example.qsync_2207097_desktop.model.User;
+import com.example.qsync_2207097_desktop.service.SessionManager;
 import com.example.qsync_2207097_desktop.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -91,9 +92,13 @@ public class HelloController {
             char[] pwd = loginPassword.getText().toCharArray();
             User u = getUserService().authenticate(email, pwd);
             if (u != null) {
+                SessionManager.saveSession("user", u.getEmail());
                 System.out.println("Login success: " + u.getEmail());
                 Alert a = new Alert(Alert.AlertType.INFORMATION, "Login successful. Welcome " + u.getName());
                 a.showAndWait();
+                Stage stage = (Stage) loginEmail.getScene().getWindow();
+                Parent home = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("user-home.fxml")));
+                stage.getScene().setRoot(home);
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR, "Invalid credentials");
                 a.showAndWait();

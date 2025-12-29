@@ -5,17 +5,45 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25" fx:controller="com.example.qsync_2207097_desktop.AdminController" xmlns:fx="http://javafx.com/fxml/1" styleClass="root">
+<BorderPane xmlns="http://javafx.com/javafx/25" stylesheets="@admin.css" fx:controller="com.example.qsync_2207097_desktop.AdminController" xmlns:fx="http://javafx.com/fxml/1" styleClass="root">
+
     <top>
         <HBox styleClass="header" />
     </top>
-    <center>
-        <VBox alignment="CENTER" spacing="12" styleClass="login-container">
-            <Label styleClass="title" text="Admin Dashboard" />
-            <Label text="(placeholder)" styleClass="muted" />
-            <Button text="Sign out" onAction="#signOut" />
+    <left>
+        <VBox spacing="10" styleClass="sidebar" alignment="TOP_LEFT" prefWidth="220" fx:id="sidebar">
+            <Label text="Admin" styleClass="sidebar-title" />
+            <Button fx:id="btnDashboard" text="Dashboard" onAction="#showHome" styleClass="nav-button" />
+            <Button fx:id="btnUsers" text="Users" onAction="#showUsers" styleClass="nav-button" />
+            <Button fx:id="btnSettings" text="Settings" onAction="#showSettings" styleClass="nav-button" />
+            <Button fx:id="btnReports" text="Reports" onAction="#showReports" styleClass="nav-button" />
+            <VBox VBox.vgrow="ALWAYS" />
+            <Button fx:id="btnSignOut" text="Sign out" onAction="#signOut" styleClass="signout-button" />
         </VBox>
+    </left>
+    <center>
+        <StackPane fx:id="contentStack" styleClass="content-stack">
+            <VBox fx:id="homePane" alignment="CENTER" spacing="12" styleClass="login-container">
+                <Label styleClass="title" text="Admin Dashboard" />
+                <Label text="Welcome to the admin dashboard." styleClass="muted" />
+            </VBox>
+
+            <VBox fx:id="usersPane" alignment="CENTER" spacing="12" visible="false" managed="false" styleClass="login-container">
+                <Label styleClass="title" text="Users Management" />
+                <Label text="(users list placeholder)" styleClass="muted" />
+            </VBox>
+
+            <VBox fx:id="settingsPane" alignment="CENTER" spacing="12" visible="false" managed="false" styleClass="login-container">
+                <Label styleClass="title" text="Settings" />
+                <Label text="(settings placeholder)" styleClass="muted" />
+            </VBox>
+
+            <VBox fx:id="reportsPane" alignment="CENTER" spacing="12" visible="false" managed="false" styleClass="login-container">
+                <Label styleClass="title" text="Reports" />
+                <Label text="(reports placeholder)" styleClass="muted" />
+            </VBox>
+        </StackPane>
     </center>
 </BorderPane>
-

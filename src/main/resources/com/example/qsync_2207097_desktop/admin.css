@@ -1,0 +1,109 @@
+.root {
+    -fx-font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -fx-font-size: 13px;
+    -fx-base: #ffffff;
+    -fx-background-color: linear-gradient(to bottom, #f7fbff, #ffffff);
+}
+.sidebar {
+    -fx-background-color: linear-gradient(to bottom right, #0f1724 0%, #0b2233 100%);
+    -fx-padding: 24 16;
+    -fx-spacing: 12;
+    -fx-effect: dropshadow(gaussian, rgba(5,10,20,0.25), 12, 0.2, 0, 2);
+}
+
+.sidebar-title {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: 600;
+    -fx-padding: 6 0 12 0;
+}
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(255,255,255,0.9);
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 12;
+    -fx-pref-width: 100%;
+    -fx-cursor: hand;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-graphic-text-gap: 12px;
+}
+
+.nav-button:hover {
+    -fx-background-color: rgba(255,255,255,0.06);
+    -fx-text-fill: white;
+    -fx-translate-x: 6px;
+}
+
+.nav-button:focused, .nav-button:pressed, .nav-button.active {
+    -fx-background-color: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+    -fx-text-fill: white;
+    -fx-effect: innershadow(two-pass-box, rgba(0,0,0,0.18), 4, 0.1, 0, 2);
+}
+
+.signout-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: rgba(255,120,120,0.95);
+    -fx-padding: 10 12;
+    -fx-alignment: CENTER_LEFT;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-font-weight: 600;
+}
+
+.signout-button:hover {
+    -fx-background-color: rgba(255,120,120,0.06);
+    -fx-text-fill: #ff9a9a;
+}
+
+.content-stack {
+    -fx-padding: 32;
+    -fx-background-color: transparent;
+}
+
+.login-container {
+    -fx-padding: 32;
+    -fx-background-color: white;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(12,24,40,0.08), 20, 0.2, 0, 8);
+    -fx-max-width: 900px;
+    -fx-min-width: 420px;
+}
+
+.title {
+    -fx-font-size: 22px;
+    -fx-font-weight: 700;
+    -fx-text-fill: #0b2333;
+}
+
+.muted {
+    -fx-text-fill: #6b7886;
+    -fx-font-size: 13px;
+}
+
+@media screen and (max-width: 720px) {
+    .sidebar {
+        -fx-pref-width: 160;
+    }
+    .login-container {
+        -fx-min-width: 300px;
+    }
+}
+
+.header {
+    -fx-pref-height: 12;
+}
+
+.nav-button:focused, .signout-button:focused {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 6, 0.1, 0, 2);
+    -fx-border-color: rgba(255,255,255,0.18);
+}
+
+.nav-button, .signout-button {
+    -fx-transition: all 200ms ease-in-out;
+}
+
+

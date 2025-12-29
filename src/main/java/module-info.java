@@ -12,6 +12,7 @@ module com.example.qsync_2207097_desktop {
     requires com.almasb.fxgl.all;
 
     requires java.sql;
+    requires java.prefs;
     opens com.example.qsync_2207097_desktop to javafx.fxml;
     exports com.example.qsync_2207097_desktop;
 }
