@@ -17,13 +17,15 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try {
-            new DatabaseConfig().initializeIfNeeded();
+            new DatabaseConfig().initializeDatabase();
         }
         catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Failed to initialize database: " + e.getMessage(), e);
         }
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 420, 320);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 550);
+        stage.minHeightProperty().bind(scene.heightProperty());
+        stage.minWidthProperty().bind(scene.widthProperty());
         stage.setTitle("QSync - Login");
         stage.setScene(scene);
         stage.show();

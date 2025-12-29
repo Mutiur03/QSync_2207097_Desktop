@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25" stylesheets="@hello.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.controller.HelloController" styleClass="root">
+<BorderPane xmlns="http://javafx.com/javafx/25" stylesheets="@log-reg.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.HelloController" styleClass="root">
     <top>
         <HBox alignment="TOP_RIGHT" spacing="8" styleClass="header">
             <Button mnemonicParsing="false" textFill="WHITE" styleClass="logo-btn" onAction="#openAdminLogin">

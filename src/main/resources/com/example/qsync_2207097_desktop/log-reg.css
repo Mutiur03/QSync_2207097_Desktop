@@ -1,7 +1,27 @@
-/* Clean white background design - no gradients */
+.input:hover {
+    -fx-border-color: #4facfe;
+}
+
+.choice-box {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+    -fx-font-family: 'Arial', sans-serif;
+}
+
+.choice-box:hover {
+    -fx-border-color: #4facfe;
+}
+
+.choice-box:focused {
+    -fx-border-color: #4facfe;
+    -fx-border-width: 2px;
+}
 
 .root {
-    -fx-background-color: #ffffff; /* white background */
+    -fx-background-color: #ffffff;
     -fx-padding: 28;
     -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 }
@@ -21,7 +41,7 @@
 }
 
 .card {
-    -fx-background-color: #ffffff; /* white card on white page with subtle border/shadow */
+    -fx-background-color: #ffffff;
     -fx-background-insets: 0;
     -fx-background-radius: 12;
     -fx-padding: 18 22 18 22;
@@ -34,7 +54,7 @@
 }
 
 .title {
-    -fx-text-fill: #0f1724; /* dark text */
+    -fx-text-fill: #0f1724;
     -fx-font-size: 20px;
     -fx-font-weight: 600;
 }
@@ -45,7 +65,7 @@
 }
 
 .input {
-    -fx-background-color: #f3f4f6; /* light gray input */
+    -fx-background-color: #f3f4f6;
     -fx-text-fill: #0f1724;
     -fx-prompt-text-fill: rgba(15,23,36,0.45);
     -fx-background-radius: 8;
@@ -54,17 +74,20 @@
     -fx-border-color: transparent;
 }
 
+
+
 .input:focused {
     -fx-border-color: #7c3aed;
     -fx-border-width: 1.5;
 }
+
 
 .login-btn {
     -fx-background-radius: 10;
     -fx-text-fill: white;
     -fx-font-weight: 600;
     -fx-padding: 8 18 8 18;
-    -fx-background-color: #7c3aed; /* solid accent color, no gradient */
+    -fx-background-color: #7c3aed;
     -fx-cursor: hand;
     -fx-effect: dropshadow(gaussian, rgba(124,58,237,0.12), 8, 0.08, 0, 4);
 }
@@ -80,7 +103,6 @@
     -fx-padding: 6 0 0 0;
 }
 
-/* hyperlink style for muted links */
 .muted-link {
     -fx-text-fill: #7c3aed;
     -fx-underline: true;
@@ -91,4 +113,4 @@
     -fx-opacity: 0.85;
 }
 
-/* Responsive: smaller card/padding on narrow widths handled via layout defaults - keep CSS simple */
+

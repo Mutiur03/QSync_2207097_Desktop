@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25" fx:controller="com.example.qsync_2207097_desktop.controller.HelloController" xmlns:fx="http://javafx.com/fxml/1" styleClass="root">
+<BorderPane xmlns="http://javafx.com/javafx/25" stylesheets="@log-reg.css" prefHeight="600" prefWidth="900" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.HelloController" styleClass="root">
     <top>
         <HBox alignment="TOP_RIGHT" spacing="8" styleClass="header">
             <Button mnemonicParsing="false" textFill="WHITE" styleClass="logo-btn" onAction="#openAdminLogin">
@@ -29,33 +29,33 @@
     </top>
 
     <center>
-        <VBox alignment="CENTER" spacing="8" VBox.vgrow="ALWAYS" BorderPane.alignment="CENTER" styleClass="login-container">
+        <VBox alignment="CENTER" spacing="6" BorderPane.alignment="CENTER" styleClass="login-container">
             <VBox alignment="CENTER" spacing="10" styleClass="card">
                 <Label styleClass="title" text="Create an account" />
 
-                <GridPane alignment="CENTER" hgap="8" vgap="8" maxWidth="460" styleClass="login-grid">
+                <GridPane alignment="CENTER" hgap="8" vgap="8" maxWidth="360" styleClass="login-grid">
                     <columnConstraints>
-                        <ColumnConstraints halignment="RIGHT" minWidth="90"/>
-                        <ColumnConstraints hgrow="ALWAYS" minWidth="200"/>
+                        <ColumnConstraints halignment="RIGHT" minWidth="70"/>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="120"/>
                     </columnConstraints>
 
                     <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="nameField" text="Mutiur Rahman" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField fx:id="nameField" styleClass="input" promptText="Your Name" maxWidth="Infinity" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                     <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <TextField fx:id="emailField" text="mutiurrahmanmr06@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <TextField fx:id="emailField" styleClass="input" promptText="you@example.com" maxWidth="Infinity" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                     <Label text="Date of birth:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                    <DatePicker fx:id="dobPicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                    <DatePicker fx:id="dobPicker" styleClass="input" maxWidth="Infinity" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
                     <Label text="Gender:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                    <ChoiceBox fx:id="genderChoice" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    <ChoiceBox fx:id="genderChoice" styleClass="input" maxWidth="Infinity" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
                     <Label text="Phone:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                    <TextField fx:id="phoneField" text="01934453796" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    <TextField fx:id="phoneField" styleClass="input" promptText="Your Phone" maxWidth="Infinity" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
                     <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                    <PasswordField fx:id="registerPassword" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    <PasswordField fx:id="registerPassword" styleClass="input" maxWidth="Infinity" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 </GridPane>
 
                 <Button onAction="#register" styleClass="login-btn" text="Register" />
@@ -64,5 +64,7 @@
             </VBox>
         </VBox>
     </center>
+    <padding>
 
+    </padding>
 </BorderPane>

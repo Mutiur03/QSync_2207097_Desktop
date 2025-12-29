@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25" fx:controller="com.example.qsync_2207097_desktop.controller.AdminController" xmlns:fx="http://javafx.com/fxml/1" styleClass="root">
+<BorderPane xmlns="http://javafx.com/javafx/25" fx:controller="com.example.qsync_2207097_desktop.AdminController" xmlns:fx="http://javafx.com/fxml/1" styleClass="root">
     <top>
         <HBox styleClass="header" />
     </top>

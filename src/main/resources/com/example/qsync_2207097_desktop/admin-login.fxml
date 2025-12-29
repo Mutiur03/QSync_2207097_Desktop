@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.controller.AdminController" styleClass="root">
+<BorderPane xmlns="http://javafx.com/javafx/25" stylesheets="@log-reg.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.AdminController" styleClass="root">
     <top>
         <HBox alignment="TOP_RIGHT" spacing="8" styleClass="header">
         </HBox>
@@ -22,10 +22,10 @@
 
                 <GridPane alignment="CENTER" hgap="8" vgap="8" maxWidth="360" styleClass="login-grid">
                     <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="adminEmail" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                    <TextField fx:id="adminEmail" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                     <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <PasswordField fx:id="adminPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    <PasswordField fx:id="adminPassword" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 </GridPane>
 
                 <Button onAction="#adminSignIn" styleClass="login-btn" text="Sign in" />
@@ -35,4 +35,3 @@
         </VBox>
     </center>
 </BorderPane>
-

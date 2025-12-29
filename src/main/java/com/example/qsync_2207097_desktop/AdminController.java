@@ -1,4 +1,4 @@
-package com.example.qsync_2207097_desktop.controller;
+package com.example.qsync_2207097_desktop;
 
 import com.example.qsync_2207097_desktop.config.DatabaseConfig;
 import com.example.qsync_2207097_desktop.model.Admin;
@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class AdminController {
     @FXML
@@ -39,27 +40,22 @@ public class AdminController {
                 Alert info = new Alert(Alert.AlertType.INFORMATION, "Admin signed in: " + a.getName());
                 info.showAndWait();
                 Stage stage = (Stage) adminEmail.getScene().getWindow();
-                Parent home = FXMLLoader.load(getClass().getResource("/com/example/qsync_2207097_desktop/admin-home.fxml"));
+                Parent home = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("admin-home.fxml")));
                 stage.getScene().setRoot(home);
             } else {
                 Alert err = new Alert(Alert.AlertType.ERROR, "Invalid admin credentials");
                 err.showAndWait();
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
             Alert err = new Alert(Alert.AlertType.ERROR, "Admin sign-in failed: " + ex.getMessage());
             err.showAndWait();
         }
     }
 
     @FXML
-    protected void signOut(ActionEvent event) {
-        try {
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Parent login = FXMLLoader.load(getClass().getResource("/com/example/qsync_2207097_desktop/hello-view.fxml"));
-            stage.getScene().setRoot(login);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    protected void signOut(ActionEvent event) throws IOException {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent login = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
+        stage.getScene().setRoot(login);
     }
 }

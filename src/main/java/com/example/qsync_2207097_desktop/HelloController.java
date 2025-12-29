@@ -1,8 +1,9 @@
-package com.example.qsync_2207097_desktop.controller;
+package com.example.qsync_2207097_desktop;
 
 import com.example.qsync_2207097_desktop.config.DatabaseConfig;
 import com.example.qsync_2207097_desktop.model.User;
 import com.example.qsync_2207097_desktop.service.UserService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class HelloController {
 
@@ -33,7 +35,6 @@ public class HelloController {
     @FXML
     private PasswordField registerPassword;
 
-    // Login fields
     @FXML
     private TextField loginEmail;
 
@@ -63,36 +64,24 @@ public class HelloController {
     }
 
     @FXML
-    protected void openRegistration(javafx.event.ActionEvent event) {
-        try {
-            Parent regRoot = FXMLLoader.load(getClass().getResource("registration-view.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.getScene().setRoot(regRoot);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    protected void openRegistration(ActionEvent event) throws IOException {
+        Parent regRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("registration-view.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(regRoot);
     }
 
     @FXML
-    protected void openLogin(javafx.event.ActionEvent event) {
-        try {
-            Parent loginRoot = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.getScene().setRoot(loginRoot);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    protected void openLogin(ActionEvent event) throws IOException {
+        Parent loginRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(loginRoot);
     }
 
     @FXML
-    protected void openAdminLogin(javafx.event.ActionEvent event) {
-        try {
-            Parent adminRoot = FXMLLoader.load(getClass().getResource("/com/example/qsync_2207097_desktop/admin-login.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.getScene().setRoot(adminRoot);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    protected void openAdminLogin(ActionEvent event) throws IOException {
+        Parent adminRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("admin-login.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(adminRoot);
     }
 
     @FXML
@@ -110,7 +99,6 @@ public class HelloController {
                 a.showAndWait();
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
             Alert a = new Alert(Alert.AlertType.ERROR, "Login failed: " + ex.getMessage());
             a.showAndWait();
         }
@@ -141,14 +129,13 @@ public class HelloController {
                 Alert a = new Alert(Alert.AlertType.INFORMATION, "Registration successful. You can now sign in.");
                 a.showAndWait();
                 Stage stage = (Stage) nameField.getScene().getWindow();
-                Parent loginRoot = FXMLLoader.load(getClass().getResource("/com/example/qsync_2207097_desktop/hello-view.fxml"));
+                Parent loginRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
                 stage.getScene().setRoot(loginRoot);
             }
         } catch (IllegalArgumentException ia) {
             Alert a = new Alert(Alert.AlertType.WARNING, ia.getMessage());
             a.showAndWait();
         } catch (Exception ex) {
-            ex.printStackTrace();
             Alert a = new Alert(Alert.AlertType.ERROR, "Registration failed: " + ex.getMessage());
             a.showAndWait();
         }
