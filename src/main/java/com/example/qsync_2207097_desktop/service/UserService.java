@@ -38,7 +38,7 @@ public class UserService {
         User u = userDao.findByEmail(email);
         if (u == null) return null;
         String stored = u.getPasswordHash();
-        if (stored == null || !stored.contains("$")) return null;
+        if (stored == null || !stored.contains("$")) return u;
         String[] parts = stored.split("\\$", 2);
         String salt = parts[0];
         String hash = parts[1];

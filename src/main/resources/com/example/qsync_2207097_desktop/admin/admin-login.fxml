@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25" stylesheets="@log-reg.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.AdminController" styleClass="root">
+<BorderPane xmlns="http://javafx.com/javafx/25" stylesheets="@../user/log-reg.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.AdminController" styleClass="root">
     <top>
         <HBox alignment="TOP_RIGHT" spacing="8" styleClass="header">
         </HBox>

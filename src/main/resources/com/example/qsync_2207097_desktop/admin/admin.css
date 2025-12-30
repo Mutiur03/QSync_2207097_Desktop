@@ -22,7 +22,6 @@
     -fx-text-fill: rgba(255,255,255,0.9);
     -fx-alignment: CENTER_LEFT;
     -fx-padding: 10 12;
-    -fx-pref-width: 100%;
     -fx-cursor: hand;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
@@ -38,7 +37,6 @@
 }
 
 .nav-button:focused, .nav-button:pressed, .nav-button.active {
-    -fx-background-color: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
     -fx-text-fill: white;
     -fx-effect: innershadow(two-pass-box, rgba(0,0,0,0.18), 4, 0.1, 0, 2);
 }

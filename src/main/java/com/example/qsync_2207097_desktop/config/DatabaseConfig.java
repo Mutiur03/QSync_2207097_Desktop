@@ -41,13 +41,13 @@ public class DatabaseConfig {
             "    name TEXT NOT NULL,\n" +
             "    avg_service_time INTEGER NOT NULL DEFAULT 5,\n" +
             "    current_token INTEGER NOT NULL DEFAULT 0,\n" +
-            "    created_at INTEGER NOT NULL\n" +
+            "    created_at INTEGER NOT NULL DEFAULT (strftime('%s','now'))\n" +
             ");",
             "CREATE TABLE IF NOT EXISTS queue_entries (\n" +
             "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
             "    queue_id INTEGER NOT NULL REFERENCES queues(id) ON DELETE CASCADE,\n" +
             "    token_number INTEGER NOT NULL,\n" +
-            "    joined_at INTEGER NOT NULL\n" +
+            "    joined_at INTEGER NOT NULL DEFAULT (strftime('%s','now'))\n" +
             ");",
             "CREATE TABLE IF NOT EXISTS users (\n" +
             "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
@@ -57,19 +57,17 @@ public class DatabaseConfig {
             "    dob TEXT,\n" +
             "    gender TEXT,\n" +
             "    phone TEXT,\n" +
-            "    created_at INTEGER NOT NULL\n" +
+            "    created_at INTEGER NOT NULL DEFAULT (strftime('%s','now'))\n" +
             ");",
             "CREATE TABLE IF NOT EXISTS admins (\n" +
             "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
             "    name TEXT NOT NULL,\n" +
             "    email TEXT NOT NULL UNIQUE,\n" +
             "    password_hash TEXT NOT NULL,\n" +
-            "    created_at INTEGER NOT NULL\n" +
+            "    created_at INTEGER NOT NULL DEFAULT (strftime('%s','now'))\n" +
             ");",
-            "CREATE INDEX IF NOT EXISTS idx_queue_entries_queue ON queue_entries(queue_id);",
-            "CREATE INDEX IF NOT EXISTS idx_queues_name ON queues(name);",
-            "CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);",
-            "CREATE INDEX IF NOT EXISTS idx_admins_email ON admins(email);"
+            "INSERT INTO users (name, email, password_hash) VALUES ('Default User', 'mutiur5bb@gmail.com', '') ON CONFLICT(email) DO UPDATE SET name=excluded.name, password_hash=excluded.password_hash;",
+            "INSERT INTO admins (name, email, password_hash) VALUES ('Administrator', 'admin@example.com', '') ON CONFLICT(email) DO UPDATE SET name=excluded.name, password_hash=excluded.password_hash;"
         };
 
         try (Statement stmt = conn.createStatement()) {

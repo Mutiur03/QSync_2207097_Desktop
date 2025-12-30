@@ -1,5 +1,9 @@
 package com.example.qsync_2207097_desktop;
 
+import com.example.qsync_2207097_desktop.admin.AdminHomeFragmentController;
+import com.example.qsync_2207097_desktop.admin.AdminUsersFragmentController;
+import com.example.qsync_2207097_desktop.admin.AdminSettingsFragmentController;
+import com.example.qsync_2207097_desktop.admin.AdminReportsFragmentController;
 import com.example.qsync_2207097_desktop.config.DatabaseConfig;
 import com.example.qsync_2207097_desktop.model.Admin;
 import com.example.qsync_2207097_desktop.service.AdminService;
@@ -62,7 +66,46 @@ public class AdminController {
         if (adminService == null) adminService = new AdminService(new DatabaseConfig());
         return adminService;
     }
+    @FXML
+    public void initialize() {
+        try {
+            FXMLLoader homeLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("admin/admin-home-fragment.fxml")));
+            Parent homeRoot = homeLoader.load();
+            AdminHomeFragmentController homeController = homeLoader.getController();
+            FXMLLoader usersLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource( "admin/admin-users-fragment.fxml")));
+            Parent usersRoot = usersLoader.load();
+            AdminUsersFragmentController usersController = usersLoader.getController();
+            FXMLLoader settingsLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource( "admin/admin-settings-fragment.fxml")));
+            Parent settingsRoot = settingsLoader.load();
+            AdminSettingsFragmentController settingsController = settingsLoader.getController();
+            FXMLLoader reportsLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("admin/admin-reports-fragment.fxml")));
+            Parent reportsRoot = reportsLoader.load();
+            AdminReportsFragmentController reportsController = reportsLoader.getController();
+            if (homeController != null) homeController.setParent(this);
+            if (usersController != null) usersController.setParent(this);
+            if (settingsController != null) settingsController.setParent(this);
+            if (reportsController != null) reportsController.setParent(this);
+            homeRoot.setVisible(true);
+            homeRoot.setManaged(true);
+            usersRoot.setVisible(false);
+            usersRoot.setManaged(false);
+            settingsRoot.setVisible(false);
+            settingsRoot.setManaged(false);
+            reportsRoot.setVisible(false);
+            reportsRoot.setManaged(false);
 
+            contentStack.getChildren().addAll(homeRoot, usersRoot, settingsRoot, reportsRoot);
+
+            homePane = (Pane) homeRoot;
+            usersPane = (Pane) usersRoot;
+            settingsPane = (Pane) settingsRoot;
+            reportsPane = (Pane) reportsRoot;
+
+            showPane(homePane);
+        } catch (Exception ex) {
+            System.err.println("[AdminController] Failed to load fragments: " + ex);
+        }
+    }
     @FXML
     protected void adminSignIn() {
         try {
@@ -74,7 +117,7 @@ public class AdminController {
                 Alert info = new Alert(Alert.AlertType.INFORMATION, "Admin signed in: " + a.getName());
                 info.showAndWait();
                 Stage stage = (Stage) adminEmail.getScene().getWindow();
-                Parent home = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("admin-home.fxml")));
+                Parent home = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("admin/admin-home.fxml")));
                 stage.getScene().setRoot(home);
             } else {
                 Alert err = new Alert(Alert.AlertType.ERROR, "Invalid admin credentials");
@@ -90,7 +133,7 @@ public class AdminController {
     protected void signOut(ActionEvent event) throws IOException {
         SessionManager.clearSession();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Parent login = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
+        Parent login = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("user/hello-view.fxml")));
         stage.getScene().setRoot(login);
     }
 
@@ -116,11 +159,6 @@ public class AdminController {
     public void showReports(ActionEvent event) {
         Objects.requireNonNull(event);
         showPane(reportsPane);
-    }
-
-    @FXML
-    public void initialize() {
-        showPane(homePane);
     }
 
     private void showPane(Pane paneToShow) {

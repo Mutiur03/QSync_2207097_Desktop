@@ -23,14 +23,14 @@ public class HelloApplication extends Application {
         catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Failed to initialize database: " + e.getMessage(), e);
         }
-        String initialFxml = "hello-view.fxml";
+        String initialFxml = "user/hello-view.fxml";
         try {
             if (SessionManager.hasSession()) {
                 String role = SessionManager.getRole();
                 if ("admin".equals(role)) {
-                    initialFxml = "admin-home.fxml";
+                    initialFxml = "admin/admin-home.fxml";
                 } else if ("user".equals(role)) {
-                    initialFxml = "user-home.fxml";
+                    initialFxml = "user/user-home.fxml";
                 }
             }
         } catch (Exception e) {

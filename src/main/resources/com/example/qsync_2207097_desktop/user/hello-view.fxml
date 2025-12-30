@@ -19,7 +19,7 @@
             <Button mnemonicParsing="false" textFill="WHITE" styleClass="logo-btn" onAction="#openAdminLogin">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@admin-panel.png" />
+                        <Image url="@../admin/admin-panel.png" />
                     </ImageView>
                 </graphic>
             </Button>
@@ -27,10 +27,7 @@
     </top>
 
     <center>
-        <!-- semantic container to center the card -->
         <VBox alignment="CENTER" spacing="6" VBox.vgrow="ALWAYS" BorderPane.alignment="CENTER" styleClass="login-container">
-
-            <!-- card wrapper for visual emphasis -->
             <VBox alignment="CENTER" spacing="10" styleClass="card">
                 <Label styleClass="title" text="Welcome back" />
 
@@ -46,9 +43,7 @@
                     <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                     <PasswordField fx:id="loginPassword" styleClass="input" maxWidth="Infinity" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 </GridPane>
-
                 <Button onAction="#signIn" styleClass="login-btn" text="Sign in" />
-
                 <Hyperlink onAction="#openRegistration" styleClass="muted-link">Don't have an account? Create one</Hyperlink>
             </VBox>
 

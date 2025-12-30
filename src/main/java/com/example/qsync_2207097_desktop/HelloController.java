@@ -66,21 +66,21 @@ public class HelloController {
 
     @FXML
     protected void openRegistration(ActionEvent event) throws IOException {
-        Parent regRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("registration-view.fxml")));
+        Parent regRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("user/registration-view.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(regRoot);
     }
 
     @FXML
     protected void openLogin(ActionEvent event) throws IOException {
-        Parent loginRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
+        Parent loginRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("user/hello-view.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(loginRoot);
     }
 
     @FXML
     protected void openAdminLogin(ActionEvent event) throws IOException {
-        Parent adminRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("admin-login.fxml")));
+        Parent adminRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("admin/admin-login.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(adminRoot);
     }
@@ -97,7 +97,7 @@ public class HelloController {
                 Alert a = new Alert(Alert.AlertType.INFORMATION, "Login successful. Welcome " + u.getName());
                 a.showAndWait();
                 Stage stage = (Stage) loginEmail.getScene().getWindow();
-                Parent home = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("user-home.fxml")));
+                Parent home = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("user/user-home.fxml")));
                 stage.getScene().setRoot(home);
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR, "Invalid credentials");
@@ -134,7 +134,7 @@ public class HelloController {
                 Alert a = new Alert(Alert.AlertType.INFORMATION, "Registration successful. You can now sign in.");
                 a.showAndWait();
                 Stage stage = (Stage) nameField.getScene().getWindow();
-                Parent loginRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("hello-view.fxml")));
+                Parent loginRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("user/hello-view.fxml")));
                 stage.getScene().setRoot(loginRoot);
             }
         } catch (IllegalArgumentException ia) {

@@ -21,7 +21,7 @@
             <Button mnemonicParsing="false" textFill="WHITE" styleClass="logo-btn" onAction="#openAdminLogin">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@admin-panel.png" />
+                        <Image url="@../admin/admin-panel.png" />
                     </ImageView>
                 </graphic>
             </Button>
