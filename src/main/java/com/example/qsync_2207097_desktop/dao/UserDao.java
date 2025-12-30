@@ -5,5 +5,6 @@ import com.example.qsync_2207097_desktop.model.User;
 public interface UserDao {
     long insert(User user);
     User findByEmail(String email);
+    int update(User user);
+    int updatePasswordByEmail(String email, String passwordHash);
 }
-

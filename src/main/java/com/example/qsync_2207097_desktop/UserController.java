@@ -11,13 +11,16 @@ import javafx.scene.control.Button;
 import javafx.scene.Node;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserController {
+
+    private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
 
     @FXML
     private Button btnHome;
@@ -31,14 +34,11 @@ public class UserController {
     @FXML
     private StackPane contentStack;
 
-    @FXML
-    private Pane homePane;
+    private Node homePane;
 
-    @FXML
-    private Pane filesPane;
+    private Node filesPane;
 
-    @FXML
-    private Pane settingsPane;
+    private Node settingsPane;
 
     @FXML
     public void initialize() {
@@ -64,13 +64,13 @@ public class UserController {
                 homeController.setWelcome(welcomeText);
             }
             contentStack.getChildren().addAll(homeRoot, filesRoot, settingsRoot);
-            homePane = (Pane) homeRoot;
-            filesPane = (Pane) filesRoot;
-            settingsPane = (Pane) settingsRoot;
+            homePane = homeRoot;
+            filesPane = filesRoot;
+            settingsPane = settingsRoot;
 
             showPane(homePane);
          } catch (Exception ex) {
-             ex.printStackTrace();
+             LOGGER.log(Level.SEVERE, "Failed to load user fragments", ex);
          }
      }
 
@@ -100,14 +100,12 @@ public class UserController {
         showPane(settingsPane);
     }
 
-    private void showPane(Pane paneToShow) {
+    private void showPane(Node paneToShow) {
         if (contentStack == null) return;
         for (Node child : contentStack.getChildren()) {
-            if (child instanceof Pane p) {
-                boolean show = p == paneToShow;
-                p.setVisible(show);
-                p.setManaged(show);
-            }
+            boolean show = child == paneToShow;
+            child.setVisible(show);
+            child.setManaged(show);
         }
 
         try {

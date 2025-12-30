@@ -36,19 +36,6 @@ public class DatabaseConfig {
     private void executeSqlCommands(Connection conn) throws SQLException {
         String[] sqlCommands = {
             "PRAGMA foreign_keys = ON;",
-            "CREATE TABLE IF NOT EXISTS queues (\n" +
-            "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    name TEXT NOT NULL,\n" +
-            "    avg_service_time INTEGER NOT NULL DEFAULT 5,\n" +
-            "    current_token INTEGER NOT NULL DEFAULT 0,\n" +
-            "    created_at INTEGER NOT NULL DEFAULT (strftime('%s','now'))\n" +
-            ");",
-            "CREATE TABLE IF NOT EXISTS queue_entries (\n" +
-            "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-            "    queue_id INTEGER NOT NULL REFERENCES queues(id) ON DELETE CASCADE,\n" +
-            "    token_number INTEGER NOT NULL,\n" +
-            "    joined_at INTEGER NOT NULL DEFAULT (strftime('%s','now'))\n" +
-            ");",
             "CREATE TABLE IF NOT EXISTS users (\n" +
             "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
             "    name TEXT NOT NULL,\n" +
@@ -66,8 +53,26 @@ public class DatabaseConfig {
             "    password_hash TEXT NOT NULL,\n" +
             "    created_at INTEGER NOT NULL DEFAULT (strftime('%s','now'))\n" +
             ");",
-            "INSERT INTO users (name, email, password_hash) VALUES ('Default User', 'mutiur5bb@gmail.com', '') ON CONFLICT(email) DO UPDATE SET name=excluded.name, password_hash=excluded.password_hash;",
-            "INSERT INTO admins (name, email, password_hash) VALUES ('Administrator', 'admin@example.com', '') ON CONFLICT(email) DO UPDATE SET name=excluded.name, password_hash=excluded.password_hash;"
+            "INSERT INTO users (name, email, password_hash) VALUES ('Default User', 'mutiur5bb@gmail.com', '') ON CONFLICT(email) DO NOTHING",
+            "INSERT INTO admins (name, email, password_hash) VALUES ('Administrator', 'admin@example.com', '') ON CONFLICT(email) DO NOTHING",
+            "CREATE TABLE IF NOT EXISTS departments (\n" +
+            "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "    name TEXT NOT NULL UNIQUE,\n" +
+            "    description TEXT\n" +
+            ");",
+            "CREATE TABLE IF NOT EXISTS doctors (\n" +
+            "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "    department_id INTEGER NOT NULL,\n" +
+            "    name TEXT NOT NULL,\n" +
+            "    email TEXT,\n" +
+            "    phone TEXT,\n" +
+            "    specialty TEXT,\n" +
+            "    start_time TEXT,\n" +
+            "    vg_time_minutes INTEGER DEFAULT 0,\n" +
+            "    years_of_experience INTEGER DEFAULT 0,\n" +
+            "    created_at INTEGER NOT NULL DEFAULT (strftime('%s','now')),\n" +
+            "    FOREIGN KEY(department_id) REFERENCES departments(id) ON DELETE CASCADE\n" +
+            ");"
         };
 
         try (Statement stmt = conn.createStatement()) {

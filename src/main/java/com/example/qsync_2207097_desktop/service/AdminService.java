@@ -39,7 +39,7 @@ public class AdminService {
         Admin a = adminDao.findByEmail(email);
         if (a == null) return null;
         String stored = a.getPasswordHash();
-        if (stored == null || !stored.contains("$")) return null;
+        if (stored == null || !stored.contains("$")) return a;
         String[] parts = stored.split("\\$", 2);
         String salt = parts[0];
         String hash = parts[1];

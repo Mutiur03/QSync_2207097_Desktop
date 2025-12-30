@@ -1,9 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ScrollPane?>
 
-<VBox xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.user.UserSettingsFragmentController" alignment="CENTER" spacing="12" styleClass="login-container">
-    <Label styleClass="title" text="Settings" />
-    <Label styleClass="muted" text="(settings placeholder)" />
-</VBox>
+<ScrollPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.qsync_2207097_desktop.user.UserSettingsFragmentController"
+            fx:id="settingsScroll" styleClass="settings-scroll" stylesheets="@user-settings.css"
+            fitToWidth="true" hbarPolicy="NEVER">
+
+    <StackPane fx:id="centerStack">
+        <VBox alignment="CENTER" spacing="8" styleClass="login-container">
+
+            <Label styleClass="title" text="Settings"/>
+
+            <VBox spacing="10" alignment="CENTER" styleClass="card settings-card">
+                <GridPane hgap="12" vgap="8" styleClass="settings-grid">
+                    <Label text="Full name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="nameField" promptText="Your full name" GridPane.rowIndex="0"
+                               GridPane.columnIndex="1" styleClass="input"/>
+
+                    <Label text="Email:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="emailField" promptText="you@example.com" GridPane.rowIndex="1"
+                               GridPane.columnIndex="1" styleClass="input"/>
+
+                    <Label text="Phone:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="phoneField" promptText="Optional phone" GridPane.rowIndex="2"
+                               GridPane.columnIndex="1" styleClass="input"/>
+
+                    <Label text="Date of birth:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <DatePicker fx:id="dobPicker" promptText="YYYY-MM-DD" GridPane.rowIndex="3" GridPane.columnIndex="1"
+                                styleClass="input"/>
+
+                    <Label text="Gender:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                    <ChoiceBox fx:id="genderChoiceBox" GridPane.rowIndex="4" GridPane.columnIndex="1"
+                               styleClass="choice-box"/>
+
+                    <HBox spacing="8" GridPane.rowIndex="5" GridPane.columnIndex="1">
+                        <Button fx:id="saveProfileButton" text="Save Profile" onAction="#onSaveProfile"
+                                styleClass="login-btn save-btn"/>
+                        <Label fx:id="profileMessageLabel" text="" styleClass="message-label"/>
+                    </HBox>
+                </GridPane>
+
+                <Label styleClass="title" text="Change password"/>
+
+                <GridPane hgap="12" vgap="8" styleClass="settings-grid">
+                    <Label text="Current password:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <PasswordField fx:id="currentPasswordField" promptText="Current password" GridPane.rowIndex="0"
+                                   GridPane.columnIndex="1"/>
+
+                    <Label text="New password:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <PasswordField fx:id="newPasswordField" promptText="New password" GridPane.rowIndex="1"
+                                   GridPane.columnIndex="1"/>
+
+                    <Label text="Confirm new:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <PasswordField fx:id="confirmPasswordField" promptText="Confirm new password" GridPane.rowIndex="2"
+                                   GridPane.columnIndex="1"/>
+
+                    <HBox spacing="8" GridPane.rowIndex="3" GridPane.columnIndex="1">
+                        <Button fx:id="changePasswordButton" text="Change Password" onAction="#onChangePassword"
+                                styleClass="login-btn change-btn"/>
+                        <Label fx:id="passwordMessageLabel" text="" styleClass="message-label"/>
+                    </HBox>
+                </GridPane>
+            </VBox>
+        </VBox>
+    </StackPane>
+</ScrollPane>

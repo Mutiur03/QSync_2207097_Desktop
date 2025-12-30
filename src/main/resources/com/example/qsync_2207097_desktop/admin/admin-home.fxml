@@ -18,6 +18,8 @@
             <Button fx:id="btnUsers" text="Users" onAction="#showUsers" styleClass="nav-button" />
             <Button fx:id="btnSettings" text="Settings" onAction="#showSettings" styleClass="nav-button" />
             <Button fx:id="btnReports" text="Reports" onAction="#showReports" styleClass="nav-button" />
+            <Button fx:id="btnDepartments" text="Departments" onAction="#showDepartments" styleClass="nav-button" />
+            <Button fx:id="btnDoctors" text="Doctors" onAction="#showDoctors" styleClass="nav-button" />
             <VBox VBox.vgrow="ALWAYS" />
             <Button fx:id="btnSignOut" text="Sign out" onAction="#signOut" styleClass="signout-button" />
         </VBox>

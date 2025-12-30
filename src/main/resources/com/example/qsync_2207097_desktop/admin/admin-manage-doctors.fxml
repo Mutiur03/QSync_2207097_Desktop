@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.admin.AdminManageDoctorsController" styleClass="root" >
+    <top>
+        <HBox spacing="10" styleClass="header">
+            <Label text="Manage Doctors" styleClass="header-title" />
+            <Label text="Department:" />
+            <ComboBox fx:id="cmbDepartments" prefWidth="200" />
+            <Button fx:id="btnAdd" text="Add Doctor" onAction="#onAddClicked" styleClass="primary-button" />
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="8" styleClass="content-container" prefWidth="800">
+            <TableView fx:id="doctorsTable" prefHeight="400">
+                <columns>
+                    <TableColumn fx:id="colName" text="Name" prefWidth="150" />
+                    <TableColumn fx:id="colEmail" text="Email" prefWidth="180" />
+                    <TableColumn fx:id="colPhone" text="Phone" prefWidth="120" />
+                    <TableColumn fx:id="colSpecialty" text="Specialty" prefWidth="120" />
+                    <TableColumn fx:id="colStartTime" text="Start Time" prefWidth="80" />
+                    <TableColumn fx:id="colVgTime" text="VG Time (min)" prefWidth="80" />
+                    <TableColumn fx:id="colYears" text="Years Exp" prefWidth="80" />
+                    <TableColumn fx:id="colActions" text="Actions" prefWidth="140" />
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
+

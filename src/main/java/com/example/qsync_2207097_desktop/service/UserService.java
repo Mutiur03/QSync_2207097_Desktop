@@ -15,13 +15,11 @@ public class UserService {
     }
 
     public long register(String name, String email, char[] password, String dob, String gender, String phone) {
-        // check exists
         if (userDao.findByEmail(email) != null) {
             throw new IllegalArgumentException("Email already registered");
         }
         String salt = PasswordUtils.generateSalt();
         String hash = PasswordUtils.hashPassword(password, salt);
-        // store salt and hash together: salt$hash
         String stored = salt + "$" + hash;
         User u = new User();
         u.setName(name);
@@ -45,5 +43,20 @@ public class UserService {
         boolean ok = PasswordUtils.verifyPassword(password, salt, hash);
         return ok ? u : null;
     }
-}
 
+    public User getByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
+
+    public int updateProfile(User user) {
+        if (user == null) throw new IllegalArgumentException("user required");
+        if (user.getName() == null || user.getName().isEmpty()) throw new IllegalArgumentException("name required");
+        if (user.getEmail() == null || !user.getEmail().contains("@")) throw new IllegalArgumentException("valid email required");
+        return userDao.update(user);
+    }
+
+    public int updatePasswordByEmail(String email, String passwordHash) {
+        if (email == null || passwordHash == null) throw new IllegalArgumentException("email and passwordHash required");
+        return userDao.updatePasswordByEmail(email, passwordHash);
+    }
+}

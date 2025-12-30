@@ -46,6 +46,12 @@ public class AdminController {
     private Pane reportsPane;
 
     @FXML
+    private Pane departmentsPane;
+
+    @FXML
+    private Pane doctorsPane;
+
+    @FXML
     private javafx.scene.control.Button btnDashboard;
 
     @FXML
@@ -58,9 +64,18 @@ public class AdminController {
     private javafx.scene.control.Button btnReports;
 
     @FXML
+    private javafx.scene.control.Button btnDepartments;
+
+    @FXML
+    private javafx.scene.control.Button btnDoctors;
+
+    @FXML
     private javafx.scene.control.Button btnSignOut;
 
     private AdminService adminService;
+
+    private com.example.qsync_2207097_desktop.admin.AdminDepartmentsFragmentController departmentsControllerRef;
+    private com.example.qsync_2207097_desktop.admin.AdminManageDoctorsController doctorsControllerRef;
 
     private AdminService getAdminService() {
         if (adminService == null) adminService = new AdminService(new DatabaseConfig());
@@ -81,10 +96,18 @@ public class AdminController {
             FXMLLoader reportsLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("admin/admin-reports-fragment.fxml")));
             Parent reportsRoot = reportsLoader.load();
             AdminReportsFragmentController reportsController = reportsLoader.getController();
+            FXMLLoader departmentsLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("admin/admin-departments-fragment.fxml")));
+            Parent departmentsRoot = departmentsLoader.load();
+            departmentsControllerRef = departmentsLoader.getController();
+            FXMLLoader doctorsLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("admin/admin-manage-doctors.fxml")));
+            Parent doctorsRoot = doctorsLoader.load();
+            doctorsControllerRef = doctorsLoader.getController();
             if (homeController != null) homeController.setParent(this);
             if (usersController != null) usersController.setParent(this);
             if (settingsController != null) settingsController.setParent(this);
             if (reportsController != null) reportsController.setParent(this);
+            if (departmentsControllerRef != null) departmentsControllerRef.setParent(this);
+            if (doctorsControllerRef != null) doctorsControllerRef.setParent(this);
             homeRoot.setVisible(true);
             homeRoot.setManaged(true);
             usersRoot.setVisible(false);
@@ -93,13 +116,19 @@ public class AdminController {
             settingsRoot.setManaged(false);
             reportsRoot.setVisible(false);
             reportsRoot.setManaged(false);
+            departmentsRoot.setVisible(false);
+            departmentsRoot.setManaged(false);
+            doctorsRoot.setVisible(false);
+            doctorsRoot.setManaged(false);
 
-            contentStack.getChildren().addAll(homeRoot, usersRoot, settingsRoot, reportsRoot);
+            contentStack.getChildren().addAll(homeRoot, usersRoot, settingsRoot, reportsRoot, departmentsRoot, doctorsRoot);
 
             homePane = (Pane) homeRoot;
             usersPane = (Pane) usersRoot;
             settingsPane = (Pane) settingsRoot;
             reportsPane = (Pane) reportsRoot;
+            departmentsPane = (Pane) departmentsRoot;
+            doctorsPane = (Pane) doctorsRoot;
 
             showPane(homePane);
         } catch (Exception ex) {
@@ -161,6 +190,27 @@ public class AdminController {
         showPane(reportsPane);
     }
 
+    @FXML
+    public void showDepartments(ActionEvent event) {
+        Objects.requireNonNull(event);
+        showPane(departmentsPane);
+    }
+
+    @FXML
+    public void showDoctors(ActionEvent event) {
+        Objects.requireNonNull(event);
+        showPane(doctorsPane);
+        try {
+            if (doctorsControllerRef != null) doctorsControllerRef.loadDepartments();
+        } catch (Exception ignored) {}
+    }
+
+    public void notifyDepartmentsChanged() {
+        try {
+            if (doctorsControllerRef != null) doctorsControllerRef.loadDepartments();
+        } catch (Exception ignored) {}
+    }
+
     private void showPane(Pane paneToShow) {
         if (contentStack == null) return;
         for (Node child : contentStack.getChildren()) {
@@ -176,12 +226,16 @@ public class AdminController {
             btnUsers.getStyleClass().remove("active");
             btnSettings.getStyleClass().remove("active");
             btnReports.getStyleClass().remove("active");
+            if (btnDepartments != null) btnDepartments.getStyleClass().remove("active");
+            if (btnDoctors != null) btnDoctors.getStyleClass().remove("active");
         } catch (Exception ignored) {}
 
         if (paneToShow == homePane) addActive(btnDashboard);
         else if (paneToShow == usersPane) addActive(btnUsers);
         else if (paneToShow == settingsPane) addActive(btnSettings);
         else if (paneToShow == reportsPane) addActive(btnReports);
+        else if (paneToShow == departmentsPane) addActive(btnDepartments);
+        else if (paneToShow == doctorsPane) addActive(btnDoctors);
     }
 
     private void addActive(javafx.scene.control.Button btn) {

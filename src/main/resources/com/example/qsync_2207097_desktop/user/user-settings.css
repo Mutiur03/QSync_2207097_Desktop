@@ -1,0 +1,79 @@
+.login-container {
+    -fx-padding: 12 10 12 10;
+    -fx-alignment: top-center;
+}
+
+.settings-scroll {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-border-color: transparent;
+}
+
+.settings-card {
+    -fx-padding: 14 18 14 18;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(16,24,40,0.04);
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.04), 10, 0.08, 0, 6);
+    -fx-max-width: 720px;
+}
+
+.settings-grid {
+    -fx-padding: 6 8 6 8;
+}
+
+.settings-grid Label {
+    -fx-text-fill: rgba(15,23,36,0.85);
+    -fx-font-size: 13px;
+}
+
+.input, .choice-box, .date-picker {
+    -fx-background-color: #fbfdff;
+    -fx-text-fill: #0f1724;
+    -fx-prompt-text-fill: rgba(15,23,36,0.45);
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 6 8 6 8;
+    -fx-border-color: transparent;
+}
+
+.message-label {
+    -fx-text-fill: #0f1724;
+    -fx-font-size: 12px;
+    -fx-padding: 6 0 0 0;
+}
+
+.save-btn {
+    -fx-background-color: #10b981;
+}
+
+.change-btn {
+    -fx-background-color: #f97316;
+}
+
+.title {
+    -fx-font-size: 20px;
+    -fx-font-weight: 600;
+    -fx-padding: 4 0 6 0;
+}
+
+.settings-scroll .viewport {
+    -fx-padding: 0;
+}
+
+@media (min-width: 800px) {
+    .settings-card { -fx-padding: 18 24 18 24; }
+}
+
+.card {
+    -fx-background-color: transparent;
+}
+
+.login-btn {
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-weight: 600;
+    -fx-padding: 6 12 6 12;
+    -fx-cursor: hand;
+}

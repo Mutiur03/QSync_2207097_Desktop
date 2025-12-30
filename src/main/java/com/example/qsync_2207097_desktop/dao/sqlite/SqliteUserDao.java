@@ -63,4 +63,33 @@ public class SqliteUserDao implements UserDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public int update(User user) {
+        String sql = "UPDATE users SET name = ?, email = ?, password_hash = ?, dob = ?, gender = ?, phone = ? WHERE id = ?";
+        try (Connection conn = dbConfig.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPasswordHash());
+            ps.setString(4, user.getDob());
+            ps.setString(5, user.getGender());
+            ps.setString(6, user.getPhone());
+            ps.setLong(7, user.getId());
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public int updatePasswordByEmail(String email, String passwordHash) {
+        String sql = "UPDATE users SET password_hash = ? WHERE email = ?";
+        try (Connection conn = dbConfig.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, passwordHash);
+            ps.setString(2, email);
+            return ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

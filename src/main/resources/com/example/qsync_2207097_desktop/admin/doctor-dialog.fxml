@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<GridPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.admin.DoctorDialogController" hgap="8" vgap="8">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10" />
+    </padding>
+
+    <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+    <TextField fx:id="txtName" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+    <Label text="Email:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+    <TextField fx:id="txtEmail" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+    <Label text="Phone:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+    <TextField fx:id="txtPhone" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+    <Label text="Specialty:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+    <TextField fx:id="txtSpecialty" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+
+    <Label text="Start Time (HH:mm):" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+    <TextField fx:id="txtStartTime" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+
+    <Label text="VG Time Minutes:" GridPane.rowIndex="5" GridPane.columnIndex="0" />
+    <Spinner fx:id="spnVgTime" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+
+    <Label text="Years of Experience:" GridPane.rowIndex="6" GridPane.columnIndex="0" />
+    <Spinner fx:id="spnYears" GridPane.rowIndex="6" GridPane.columnIndex="1" />
+
+    <HBox spacing="8" GridPane.rowIndex="7" GridPane.columnIndex="1" >
+        <Button fx:id="btnSave" text="Save" onAction="#onSaveClicked" />
+        <Button text="Cancel" onAction="#onCancelClicked" />
+    </HBox>
+</GridPane>
+
