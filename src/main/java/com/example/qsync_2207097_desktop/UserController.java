@@ -32,6 +32,9 @@ public class UserController {
     private Button btnSettings;
 
     @FXML
+    private Button btnBooking;
+
+    @FXML
     private StackPane contentStack;
 
     private Node homePane;
@@ -39,6 +42,8 @@ public class UserController {
     private Node filesPane;
 
     private Node settingsPane;
+
+    private Node bookingPane;
 
     @FXML
     public void initialize() {
@@ -55,6 +60,10 @@ public class UserController {
             FXMLLoader settingsLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("user/user-settings-fragment.fxml")));
             javafx.scene.Parent settingsRoot = settingsLoader.load();
             UserSettingsFragmentController settingsController = settingsLoader.getController();
+            FXMLLoader bookingLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("user/user-booking-fragment.fxml")));
+            javafx.scene.Parent bookingRoot = bookingLoader.load();
+            bookingRoot.setVisible(false);
+            bookingRoot.setManaged(false);
             if (homeController != null) homeController.setParent(this);
             if (filesController != null) filesController.setParent(this);
             if (settingsController != null) settingsController.setParent(this);
@@ -63,10 +72,11 @@ public class UserController {
                 homeController.setEmail(emailText);
                 homeController.setWelcome(welcomeText);
             }
-            contentStack.getChildren().addAll(homeRoot, filesRoot, settingsRoot);
+            contentStack.getChildren().addAll(homeRoot, filesRoot, settingsRoot, bookingRoot);
             homePane = homeRoot;
             filesPane = filesRoot;
             settingsPane = settingsRoot;
+            bookingPane = bookingRoot;
 
             showPane(homePane);
          } catch (Exception ex) {
@@ -100,6 +110,17 @@ public class UserController {
         showPane(settingsPane);
     }
 
+    @FXML
+    public void showBooking(ActionEvent event) {
+        if (contentStack == null) return;
+        if (bookingPane != null) {
+            showPane(bookingPane);
+        } else if (contentStack.getChildren().size() >= 4) {
+            Node bookingNode = contentStack.getChildren().get(3);
+            showPane(bookingNode);
+        }
+    }
+
     private void showPane(Node paneToShow) {
         if (contentStack == null) return;
         for (Node child : contentStack.getChildren()) {
@@ -112,11 +133,13 @@ public class UserController {
             btnHome.getStyleClass().remove("active");
             btnFiles.getStyleClass().remove("active");
             btnSettings.getStyleClass().remove("active");
+            if (btnBooking != null) btnBooking.getStyleClass().remove("active");
         } catch (Exception ignored) {}
 
         if (paneToShow == homePane) addActive(btnHome);
         else if (paneToShow == filesPane) addActive(btnFiles);
         else if (paneToShow == settingsPane) addActive(btnSettings);
+        else if (paneToShow == bookingPane) addActive(btnBooking);
     }
 
     private void addActive(Button btn) {

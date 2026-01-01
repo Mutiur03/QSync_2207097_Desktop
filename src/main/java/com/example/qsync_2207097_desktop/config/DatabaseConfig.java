@@ -72,7 +72,25 @@ public class DatabaseConfig {
             "    years_of_experience INTEGER DEFAULT 0,\n" +
             "    created_at INTEGER NOT NULL DEFAULT (strftime('%s','now')),\n" +
             "    FOREIGN KEY(department_id) REFERENCES departments(id) ON DELETE CASCADE\n" +
-            ");"
+            ");",
+            "CREATE TABLE IF NOT EXISTS appointments (\n" +
+            "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+            "    patient_id INTEGER,\n" +
+            "    patient_name TEXT NOT NULL,\n" +
+            "    patient_phone TEXT,\n" + "doctor_id TEXT,\n"+ "department_id INTEGER,\n"+
+            "    date TEXT NOT NULL,\n" + "token INTEGER,\n"+
+            "    start_time TEXT NOT NULL,\n" +
+            "    end_time TEXT NOT NULL,\n" +
+            "    start_ts INTEGER NOT NULL,\n" +
+            "    end_ts INTEGER NOT NULL,\n" +
+            "    status TEXT NOT NULL DEFAULT 'waiting',\n" +
+            "    notes TEXT,\n" +
+            "    created_at INTEGER NOT NULL DEFAULT (strftime('%s','now')),\n" +
+            "    updated_at INTEGER,\n" +
+            "    CHECK (start_ts < end_ts)\n" +
+            ");",
+            "INSERT OR IGNORE INTO departments (name) VALUES ('Cardiology')",
+            "INSERT OR IGNORE INTO doctors (department_id, name) SELECT id, 'Mutiur Rahman' FROM departments WHERE name = 'Cardiology'",
         };
 
         try (Statement stmt = conn.createStatement()) {

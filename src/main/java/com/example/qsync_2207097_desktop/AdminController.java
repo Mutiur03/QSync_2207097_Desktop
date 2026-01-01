@@ -25,6 +25,9 @@ import java.util.Objects;
 
 public class AdminController {
     @FXML
+    private javafx.scene.layout.VBox sidebar;
+
+    @FXML
     private TextField adminEmail;
 
     @FXML
@@ -70,7 +73,13 @@ public class AdminController {
     private javafx.scene.control.Button btnDoctors;
 
     @FXML
+    private javafx.scene.control.Button btnAppointments;
+
+    @FXML
     private javafx.scene.control.Button btnSignOut;
+
+
+    private Pane appointmentsPane;
 
     private AdminService adminService;
 
@@ -102,6 +111,14 @@ public class AdminController {
             FXMLLoader doctorsLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("admin/admin-manage-doctors.fxml")));
             Parent doctorsRoot = doctorsLoader.load();
             doctorsControllerRef = doctorsLoader.getController();
+            try {
+                FXMLLoader appointmentsLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("admin/admin-appointments-fragment.fxml")));
+                Parent appointmentsRoot = appointmentsLoader.load();
+                appointmentsPane = (Pane) appointmentsRoot;
+                appointmentsRoot.setVisible(false);
+                appointmentsRoot.setManaged(false);
+                contentStack.getChildren().add(appointmentsRoot);
+            } catch (Exception ignored) {}
             if (homeController != null) homeController.setParent(this);
             if (usersController != null) usersController.setParent(this);
             if (settingsController != null) settingsController.setParent(this);
@@ -205,6 +222,11 @@ public class AdminController {
         } catch (Exception ignored) {}
     }
 
+    @FXML
+    public void showAppointments(ActionEvent event) {
+        showPane(appointmentsPane);
+    }
+
     public void notifyDepartmentsChanged() {
         try {
             if (doctorsControllerRef != null) doctorsControllerRef.loadDepartments();
@@ -236,6 +258,7 @@ public class AdminController {
         else if (paneToShow == reportsPane) addActive(btnReports);
         else if (paneToShow == departmentsPane) addActive(btnDepartments);
         else if (paneToShow == doctorsPane) addActive(btnDoctors);
+        else if (paneToShow == appointmentsPane) addActive(btnAppointments);
     }
 
     private void addActive(javafx.scene.control.Button btn) {

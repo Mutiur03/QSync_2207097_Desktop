@@ -16,6 +16,7 @@
             <Label text="User" styleClass="sidebar-title" />
             <Button fx:id="btnHome" text="Home" onAction="#showHome" styleClass="nav-button" />
             <Button fx:id="btnFiles" text="Files" onAction="#showFiles" styleClass="nav-button" />
+            <Button fx:id="btnBooking" text="Book Appointment" onAction="#showBooking" styleClass="nav-button" />
             <Button fx:id="btnSettings" text="Settings" onAction="#showSettings" styleClass="nav-button" />
             <VBox VBox.vgrow="ALWAYS" />
             <Button text="Sign out" onAction="#signOut" styleClass="signout-button" />

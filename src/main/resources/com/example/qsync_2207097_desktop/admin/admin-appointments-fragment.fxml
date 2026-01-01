@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Pagination?>
+<VBox spacing="8" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.admin.AdminAppointmentsFragmentController">
+    <children>
+        <Label text="Appointments" styleClass="h2" />
+        <DatePicker fx:id="datePicker" />
+        <Button text="Load" fx:id="btnLoad" onAction="#onLoad" />
+        <ListView fx:id="listView" prefHeight="300" />
+        <Pagination fx:id="pagination" />
+    </children>
+</VBox>
+
