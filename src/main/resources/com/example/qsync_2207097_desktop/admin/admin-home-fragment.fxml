@@ -1,8 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.admin.AdminHomeFragmentController" alignment="CENTER" spacing="12" styleClass="login-container">
-    <Label styleClass="title" text="Admin Dashboard" />
-    <Label text="Welcome to the admin dashboard." styleClass="muted" />
-</VBox>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.admin.AdminHomeFragmentController">
+    <VBox spacing="30" styleClass="content-padding">
+        <VBox spacing="5">
+            <Label styleClass="h1" text="Admin Dashboard" />
+            <Label styleClass="muted" text="Welcome back! Here's what's happening today." />
+        </VBox>
+
+        <FlowPane hgap="20" vgap="20">
+            <VBox styleClass="stats-card">
+                <Label styleClass="stats-label" text="TOTAL USERS" />
+                <Label fx:id="lblTotalUsers" styleClass="stats-value" text="0" />
+                <Label style="-fx-text-fill: #10b981; -fx-font-size: 11px; -fx-font-weight: bold;" text="+12% from last month" />
+            </VBox>
+            
+            <VBox styleClass="stats-card">
+                <Label styleClass="stats-label" text="DEPARTMENTS" />
+                <Label fx:id="lblDepartments" styleClass="stats-value" text="0" />
+                <Label styleClass="muted" style="-fx-font-size: 11px;" text="All systems active" />
+            </VBox>
+
+            <VBox styleClass="stats-card">
+                <Label styleClass="stats-label" text="ACTIVE DOCTORS" />
+                <Label fx:id="lblActiveDoctors" styleClass="stats-value" text="0" />
+                <Label style="-fx-text-fill: #3b82f6; -fx-font-size: 11px;" text="Available for booking" />
+            </VBox>
+
+            <VBox styleClass="stats-card">
+                <Label styleClass="stats-label" text="TODAY'S APPOINTMENTS" />
+                <Label fx:id="lblTodayAppointments" styleClass="stats-value" text="0" />
+                <Label style="-fx-text-fill: #f59e0b; -fx-font-size: 11px;" text="Updated just now" />
+            </VBox>
+        </FlowPane>
+
+        <VBox spacing="15">
+            <Label styleClass="h2" text="Quick Actions" />
+            <FlowPane hgap="15" vgap="15">
+                <Button onAction="#onAddDoctor" styleClass="btn-primary" text="Add New Doctor" />
+                <Button onAction="#onGenerateReport" styleClass="btn-primary" text="Generate Report" />
+                <Button onAction="#onShowSettings" styleClass="btn-primary" text="System Settings" />
+            </FlowPane>
+        </VBox>
+    </VBox>
+</ScrollPane>
+

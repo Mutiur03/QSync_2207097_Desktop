@@ -7,25 +7,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25" stylesheets="@admin.css" fx:controller="com.example.qsync_2207097_desktop.AdminController" xmlns:fx="http://javafx.com/fxml/1" styleClass="root">
-    <top>
-        <HBox styleClass="header" />
-    </top>
+<BorderPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.AdminController" styleClass="root" stylesheets="@admin.css">
     <left>
-        <VBox spacing="10" styleClass="sidebar" prefWidth="220" fx:id="sidebar">
-            <Label text="Admin" styleClass="sidebar-title" />
-            <Button fx:id="btnDashboard" text="Dashboard" onAction="#showHome" styleClass="nav-button" />
-            <Button fx:id="btnUsers" text="Users" onAction="#showUsers" styleClass="nav-button" />
-            <Button fx:id="btnSettings" text="Settings" onAction="#showSettings" styleClass="nav-button" />
-            <Button fx:id="btnReports" text="Reports" onAction="#showReports" styleClass="nav-button" />
-            <Button fx:id="btnDepartments" text="Departments" onAction="#showDepartments" styleClass="nav-button" />
-            <Button fx:id="btnDoctors" text="Doctors" onAction="#showDoctors" styleClass="nav-button" />
-            <Button fx:id="btnAppointments" text="Appointments" onAction="#showAppointments" styleClass="nav-button" />
-            <VBox VBox.vgrow="ALWAYS" />
-            <Button fx:id="btnSignOut" text="Sign out" onAction="#signOut" styleClass="signout-button" />
+        <VBox fx:id="sidebar" prefWidth="240" spacing="5" styleClass="sidebar">
+            <Label styleClass="sidebar-title" text="QSync Admin" />
+            
+            <VBox spacing="2" VBox.vgrow="ALWAYS">
+                <Button fx:id="btnDashboard" onAction="#showHome" styleClass="nav-button" text="Dashboard" />
+                <Button fx:id="btnUsers" onAction="#showUsers" styleClass="nav-button" text="Users Management" />
+                <Button fx:id="btnDepartments" onAction="#showDepartments" styleClass="nav-button" text="Departments" />
+                <Button fx:id="btnDoctors" onAction="#showDoctors" styleClass="nav-button" text="Manage Doctors" />
+                <Button fx:id="btnAppointments" onAction="#showAppointments" styleClass="nav-button" text="Appointments" />
+                <Button fx:id="btnReports" onAction="#showReports" styleClass="nav-button" text="System Reports" />
+                <Button fx:id="btnSettings" onAction="#showSettings" styleClass="nav-button" text="Settings" />
+            </VBox>
+
+            <Button fx:id="btnSignOut" onAction="#signOut" styleClass="signout-button" text="Sign out" />
         </VBox>
     </left>
     <center>
-        <StackPane fx:id="contentStack" styleClass="content-stack"/>
+        <StackPane fx:id="contentStack" styleClass="content-stack" />
     </center>
 </BorderPane>
+

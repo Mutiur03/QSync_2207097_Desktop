@@ -15,6 +15,7 @@ public class Appointment {
     private long createdAt;
     private Long updatedAt;
     private String doctorId;
+    private String doctorName;
     private Long departmentId;
     private Integer token;
     private String priority;
@@ -62,6 +63,9 @@ public class Appointment {
 
     public String getDoctorId() { return doctorId; }
     public void setDoctorId(String doctorId) { this.doctorId = doctorId; }
+
+    public String getDoctorName() { return doctorName; }
+    public void setDoctorName(String doctorName) { this.doctorName = doctorName; }
 
     public Long getDepartmentId() { return departmentId; }
     public void setDepartmentId(Long departmentId) { this.departmentId = departmentId; }

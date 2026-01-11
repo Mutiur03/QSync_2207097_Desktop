@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.admin.AdminSettingsFragmentController" alignment="CENTER" spacing="12" styleClass="login-container">
-    <Label styleClass="title" text="Settings" />
-    <Label text="(settings placeholder)" styleClass="muted" />
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox spacing="20" styleClass="content-padding" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.admin.AdminSettingsFragmentController">
+    <VBox spacing="5">
+        <Label styleClass="h1" text="General Settings" />
+        <Label styleClass="muted" text="Configure administrative preferences and system behavior." />
+    </VBox>
+
+    <VBox spacing="20" styleClass="card">
+        <VBox spacing="10">
+            <Label styleClass="form-label" text="Application Name" />
+            <TextField prefWidth="300" styleClass="text-field" text="QSync Desktop" />
+        </VBox>
+
+        <VBox spacing="10">
+            <Label styleClass="form-label" text="Admin Email" />
+            <TextField prefWidth="300" styleClass="text-field" text="admin@qsync.com" />
+        </VBox>
+
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <CheckBox styleClass="check-box" text="Enable Email Notifications" />
+        </HBox>
+
+        <Button styleClass="btn-primary" text="Save Changes" />
+    </VBox>
 </VBox>

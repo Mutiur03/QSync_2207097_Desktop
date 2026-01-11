@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.admin.AdminReportsFragmentController" alignment="CENTER" spacing="12" styleClass="login-container">
-    <Label styleClass="title" text="Reports" />
-    <Label text="(reports placeholder)" styleClass="muted" />
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox spacing="20" styleClass="content-padding" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.admin.AdminReportsFragmentController">
+    <VBox spacing="5">
+        <Label styleClass="h1" text="Analytics &amp; Reports" />
+        <Label styleClass="muted" text="Analyze system performance and patient statistics." />
+    </VBox>
+
+    <HBox spacing="20">
+        <VBox spacing="10" styleClass="stats-card" HBox.hgrow="ALWAYS">
+            <Label styleClass="stats-label" text="Monthly Growth" />
+            <Label styleClass="stats-value" text="+12.5%" />
+        </VBox>
+        <VBox spacing="10" styleClass="stats-card" HBox.hgrow="ALWAYS">
+            <Label styleClass="stats-label" text="Patient Satisfaction" />
+            <Label styleClass="stats-value" text="4.8/5.0" />
+        </VBox>
+    </HBox>
+
+    <VBox alignment="CENTER" spacing="10" styleClass="card" VBox.vgrow="ALWAYS">
+        <Label styleClass="muted" text="Detailed reports and charts will appear here." />
+    </VBox>
 </VBox>

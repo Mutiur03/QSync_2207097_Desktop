@@ -61,7 +61,10 @@ public class SqliteAppointmentDao implements AppointmentDao {
 
     @Override
     public Appointment getById(long id) {
-        String sql = "SELECT id,patient_id,patient_name,patient_phone,date,start_time,end_time,start_ts,end_ts,status,notes,priority,doctor_id,department_id,token,created_at,updated_at FROM appointments WHERE id = ?";
+        String sql = "SELECT a.id, a.patient_id, a.patient_name, a.patient_phone, a.date, a.start_time, a.end_time, a.start_ts, a.end_ts, a.status, a.notes, a.priority, a.doctor_id, a.department_id, a.token, a.created_at, a.updated_at, d.name AS doctor_name " +
+                     "FROM appointments a " +
+                     "LEFT JOIN doctors d ON a.doctor_id = d.id " +
+                     "WHERE a.id = ?";
         try (Connection conn = dbConfig.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -75,7 +78,10 @@ public class SqliteAppointmentDao implements AppointmentDao {
 
     @Override
     public List<Appointment> listByDate(String date, int limit, int offset) {
-        String sql = "SELECT id,patient_id,patient_name,patient_phone,date,start_time,end_time,start_ts,end_ts,status,notes,priority,doctor_id,department_id,token,created_at,updated_at FROM appointments WHERE date = ? ORDER BY start_ts ASC LIMIT ? OFFSET ?";
+        String sql = "SELECT a.id, a.patient_id, a.patient_name, a.patient_phone, a.date, a.start_time, a.end_time, a.start_ts, a.end_ts, a.status, a.notes, a.priority, a.doctor_id, a.department_id, a.token, a.created_at, a.updated_at, d.name AS doctor_name " +
+                     "FROM appointments a " +
+                     "LEFT JOIN doctors d ON a.doctor_id = d.id " +
+                     "WHERE a.date = ? ORDER BY a.start_ts ASC LIMIT ? OFFSET ?";
         List<Appointment> list = new ArrayList<>();
         try (Connection conn = dbConfig.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, date);
@@ -94,7 +100,10 @@ public class SqliteAppointmentDao implements AppointmentDao {
 
     @Override
     public List<Appointment> listByPatient(long patientId, int limit, int offset) {
-        String sql = "SELECT id,patient_id,patient_name,patient_phone,date,start_time,end_time,start_ts,end_ts,status,notes,priority,doctor_id,department_id,token,created_at,updated_at FROM appointments WHERE patient_id = ? ORDER BY start_ts DESC LIMIT ? OFFSET ?";
+        String sql = "SELECT a.id, a.patient_id, a.patient_name, a.patient_phone, a.date, a.start_time, a.end_time, a.start_ts, a.end_ts, a.status, a.notes, a.priority, a.doctor_id, a.department_id, a.token, a.created_at, a.updated_at, d.name AS doctor_name " +
+                     "FROM appointments a " +
+                     "LEFT JOIN doctors d ON a.doctor_id = d.id " +
+                     "WHERE a.patient_id = ? ORDER BY a.start_ts DESC LIMIT ? OFFSET ?";
         List<Appointment> list = new ArrayList<>();
         try (Connection conn = dbConfig.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, patientId);
@@ -170,6 +179,7 @@ public class SqliteAppointmentDao implements AppointmentDao {
         a.setCreatedAt(rs.getLong("created_at"));
         long u = rs.getLong("updated_at"); if (!rs.wasNull()) a.setUpdatedAt(u);
         a.setDoctorId(rs.getString("doctor_id"));
+        a.setDoctorName(rs.getString("doctor_name"));
         long did = rs.getLong("department_id"); if (!rs.wasNull()) a.setDepartmentId(did);
         int t = rs.getInt("token"); if (!rs.wasNull()) a.setToken(t);
         return a;

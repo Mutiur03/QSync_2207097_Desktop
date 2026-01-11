@@ -32,7 +32,7 @@ public class UserBookingFragmentController {
     private ComboBox<Doctor> doctorCombo;
 
     @FXML
-    private ChoiceBox<String> priorityCombo;
+    private ToggleGroup priorityGroup;
 
     @FXML
     private TextArea symptomsField;
@@ -93,8 +93,7 @@ public class UserBookingFragmentController {
                 }
             });
 
-            priorityCombo.setItems(FXCollections.observableArrayList("normal", "urgent", "emergency"));
-            priorityCombo.setValue("normal");
+            // Priority selection is handled by the ToggleGroup in FXML
 
         } catch (Exception ex) {
             Alert a = new Alert(Alert.AlertType.ERROR, "Failed to load departments: " + ex.getMessage());
@@ -107,7 +106,8 @@ public class UserBookingFragmentController {
         try {
             Department selDept = departmentCombo.getValue();
             Doctor selDoc = doctorCombo.getValue();
-            String priority = priorityCombo.getValue();
+            RadioButton selectedPriority = (RadioButton) priorityGroup.getSelectedToggle();
+            String priority = selectedPriority != null ? selectedPriority.getText().toLowerCase() : "normal";
             String symptoms = symptomsField.getText();
             if (selDept == null) { Alert a = new Alert(Alert.AlertType.ERROR, "Please select a department"); a.showAndWait(); return; }
             if (selDoc == null) { Alert a = new Alert(Alert.AlertType.ERROR, "Please select a doctor"); a.showAndWait(); return; }

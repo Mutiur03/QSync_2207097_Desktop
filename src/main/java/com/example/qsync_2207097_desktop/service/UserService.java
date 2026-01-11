@@ -6,6 +6,7 @@ import com.example.qsync_2207097_desktop.dao.sqlite.SqliteUserDao;
 import com.example.qsync_2207097_desktop.model.User;
 
 import java.time.Instant;
+import java.util.List;
 
 public class UserService {
     private final UserDao userDao;
@@ -58,5 +59,9 @@ public class UserService {
     public int updatePasswordByEmail(String email, String passwordHash) {
         if (email == null || passwordHash == null) throw new IllegalArgumentException("email and passwordHash required");
         return userDao.updatePasswordByEmail(email, passwordHash);
+    }
+
+    public List<User> getAllUsers() {
+        return userDao.findAll();
     }
 }

@@ -59,6 +59,8 @@ public class AdminDepartmentsFragmentController {
             private final HBox box = new HBox(8, editBtn, delBtn);
 
             {
+                editBtn.getStyleClass().add("btn-secondary");
+                delBtn.getStyleClass().add("btn-danger");
                 editBtn.setOnAction(e -> {
                     Department d = getTableView().getItems().get(getIndex());
                     onEditClicked(d);

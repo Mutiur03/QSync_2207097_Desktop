@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SqliteUserDao implements UserDao {
     private final DatabaseConfig dbConfig;
@@ -89,7 +91,30 @@ public class SqliteUserDao implements UserDao {
             ps.setString(2, email);
             return ps.executeUpdate();
         } catch (SQLException e) {
+             throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<User> findAll() {
+        String sql = "SELECT id,name,email,password_hash,dob,gender,phone,created_at FROM users";
+        List<User> list = new ArrayList<>();
+        try (Connection conn = dbConfig.getConnection(); PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                User u = new User();
+                u.setId(rs.getLong("id"));
+                u.setName(rs.getString("name"));
+                u.setEmail(rs.getString("email"));
+                u.setPasswordHash(rs.getString("password_hash"));
+                u.setDob(rs.getString("dob"));
+                u.setGender(rs.getString("gender"));
+                u.setPhone(rs.getString("phone"));
+                u.setCreatedAt(rs.getLong("created_at"));
+                list.add(u);
+            }
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return list;
     }
 }

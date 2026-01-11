@@ -12,6 +12,9 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+
 <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.user.UserBookingFragmentController">
     <VBox spacing="30" styleClass="content-padding">
         <VBox spacing="8">
@@ -43,7 +46,14 @@
 
                 <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <Label styleClass="form-label" text="Priority" />
-                    <ChoiceBox fx:id="priorityCombo" maxWidth="Infinity" />
+                    <HBox spacing="10">
+                        <fx:define>
+                            <ToggleGroup fx:id="priorityGroup" />
+                        </fx:define>
+                        <RadioButton fx:id="normalPriority" styleClass="priority-button, priority-normal" text="Normal" toggleGroup="$priorityGroup" selected="true" />
+                        <RadioButton fx:id="urgentPriority" styleClass="priority-button, priority-urgent" text="Urgent" toggleGroup="$priorityGroup" />
+                        <RadioButton fx:id="emergencyPriority" styleClass="priority-button, priority-emergency" text="Emergency" toggleGroup="$priorityGroup" />
+                    </HBox>
                 </VBox>
                 
                 <VBox spacing="8" GridPane.columnSpan="2" GridPane.rowIndex="2">

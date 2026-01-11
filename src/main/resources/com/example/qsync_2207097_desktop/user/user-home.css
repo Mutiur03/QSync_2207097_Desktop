@@ -223,3 +223,45 @@
   -fx-text-fill: -fx-theme-text-secondary;
   -fx-padding: 0 0 4 0;
 }
+
+.priority-button {
+  -fx-background-color: white;
+  -fx-border-color: -fx-theme-border-muted;
+  -fx-border-radius: 8px;
+  -fx-background-radius: 8px;
+  -fx-padding: 8 20 8 20;
+  -fx-cursor: hand;
+  -fx-text-fill: -fx-theme-text-secondary;
+  -fx-font-weight: bold;
+}
+
+.priority-button:hover {
+  -fx-background-color: #f8fafc;
+}
+
+.priority-button:selected {
+  -fx-text-fill: white;
+}
+
+/* Hide the radio circle */
+.priority-button .radio {
+  -fx-padding: 0;
+  -fx-shape: "";
+  -fx-pref-width: 0;
+  -fx-pref-height: 0;
+}
+
+.priority-normal:selected {
+  -fx-background-color: -fx-theme-success;
+  -fx-border-color: -fx-theme-success;
+}
+
+.priority-urgent:selected {
+  -fx-background-color: -fx-theme-warning;
+  -fx-border-color: -fx-theme-warning;
+}
+
+.priority-emergency:selected {
+  -fx-background-color: -fx-theme-danger;
+  -fx-border-color: -fx-theme-danger;
+}

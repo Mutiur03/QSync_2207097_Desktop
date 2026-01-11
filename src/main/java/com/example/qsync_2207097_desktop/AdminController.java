@@ -16,7 +16,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -37,22 +36,22 @@ public class AdminController {
     private StackPane contentStack;
 
     @FXML
-    private Pane homePane;
+    private Node homePane;
 
     @FXML
-    private Pane usersPane;
+    private Node usersPane;
 
     @FXML
-    private Pane settingsPane;
+    private Node settingsPane;
 
     @FXML
-    private Pane reportsPane;
+    private Node reportsPane;
 
     @FXML
-    private Pane departmentsPane;
+    private Node departmentsPane;
 
     @FXML
-    private Pane doctorsPane;
+    private Node doctorsPane;
 
     @FXML
     private javafx.scene.control.Button btnDashboard;
@@ -79,7 +78,7 @@ public class AdminController {
     private javafx.scene.control.Button btnSignOut;
 
 
-    private Pane appointmentsPane;
+    private Node appointmentsPane;
 
     private AdminService adminService;
 
@@ -114,7 +113,7 @@ public class AdminController {
             try {
                 FXMLLoader appointmentsLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("admin/admin-appointments-fragment.fxml")));
                 Parent appointmentsRoot = appointmentsLoader.load();
-                appointmentsPane = (Pane) appointmentsRoot;
+                appointmentsPane = appointmentsRoot;
                 appointmentsRoot.setVisible(false);
                 appointmentsRoot.setManaged(false);
                 contentStack.getChildren().add(appointmentsRoot);
@@ -140,12 +139,12 @@ public class AdminController {
 
             contentStack.getChildren().addAll(homeRoot, usersRoot, settingsRoot, reportsRoot, departmentsRoot, doctorsRoot);
 
-            homePane = (Pane) homeRoot;
-            usersPane = (Pane) usersRoot;
-            settingsPane = (Pane) settingsRoot;
-            reportsPane = (Pane) reportsRoot;
-            departmentsPane = (Pane) departmentsRoot;
-            doctorsPane = (Pane) doctorsRoot;
+            homePane = homeRoot;
+            usersPane = usersRoot;
+            settingsPane = settingsRoot;
+            reportsPane = reportsRoot;
+            departmentsPane = departmentsRoot;
+            doctorsPane = doctorsRoot;
 
             showPane(homePane);
         } catch (Exception ex) {
@@ -240,14 +239,12 @@ public class AdminController {
         } catch (Exception ignored) {}
     }
 
-    private void showPane(Pane paneToShow) {
-        if (contentStack == null) return;
+    private void showPane(Node nodeToShow) {
+        if (contentStack == null || nodeToShow == null) return;
         for (Node child : contentStack.getChildren()) {
-            if (child instanceof Pane p) {
-                boolean show = p == paneToShow;
-                p.setVisible(show);
-                p.setManaged(show);
-            }
+            boolean show = child == nodeToShow;
+            child.setVisible(show);
+            child.setManaged(show);
         }
 
         try {
@@ -257,15 +254,16 @@ public class AdminController {
             btnReports.getStyleClass().remove("active");
             if (btnDepartments != null) btnDepartments.getStyleClass().remove("active");
             if (btnDoctors != null) btnDoctors.getStyleClass().remove("active");
+            if (btnAppointments != null) btnAppointments.getStyleClass().remove("active");
         } catch (Exception ignored) {}
 
-        if (paneToShow == homePane) addActive(btnDashboard);
-        else if (paneToShow == usersPane) addActive(btnUsers);
-        else if (paneToShow == settingsPane) addActive(btnSettings);
-        else if (paneToShow == reportsPane) addActive(btnReports);
-        else if (paneToShow == departmentsPane) addActive(btnDepartments);
-        else if (paneToShow == doctorsPane) addActive(btnDoctors);
-        else if (paneToShow == appointmentsPane) addActive(btnAppointments);
+        if (nodeToShow == homePane) addActive(btnDashboard);
+        else if (nodeToShow == usersPane) addActive(btnUsers);
+        else if (nodeToShow == settingsPane) addActive(btnSettings);
+        else if (nodeToShow == reportsPane) addActive(btnReports);
+        else if (nodeToShow == departmentsPane) addActive(btnDepartments);
+        else if (nodeToShow == doctorsPane) addActive(btnDoctors);
+        else if (nodeToShow == appointmentsPane) addActive(btnAppointments);
     }
 
     private void addActive(javafx.scene.control.Button btn) {

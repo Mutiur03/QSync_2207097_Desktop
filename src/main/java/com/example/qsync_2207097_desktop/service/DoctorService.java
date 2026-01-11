@@ -23,6 +23,10 @@ public class DoctorService {
         return dao.getByDepartment(departmentId);
     }
 
+    public List<Doctor> getAllDoctors() {
+        return dao.getAll();
+    }
+
     public Doctor getById(String id) {
         return dao.getById(id);
     }

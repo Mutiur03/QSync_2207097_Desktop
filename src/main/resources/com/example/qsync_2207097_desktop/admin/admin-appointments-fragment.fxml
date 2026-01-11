@@ -1,17 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Pagination?>
-<VBox spacing="8" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.admin.AdminAppointmentsFragmentController">
-    <children>
-        <Label text="Appointments" styleClass="h2" />
-        <DatePicker fx:id="datePicker" />
-        <Button text="Load" fx:id="btnLoad" onAction="#onLoad" />
-        <ListView fx:id="listView" prefHeight="300" />
-        <Pagination fx:id="pagination" />
-    </children>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox spacing="20" styleClass="content-padding" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.admin.AdminAppointmentsFragmentController">
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <VBox spacing="5" HBox.hgrow="ALWAYS">
+            <Label styleClass="h1" text="Appointments" />
+            <Label styleClass="muted" text="Monitor and manage patient appointments." />
+        </VBox>
+        <HBox alignment="CENTER_RIGHT" spacing="10">
+            <Label styleClass="form-label" text="Select Date:" />
+            <DatePicker fx:id="datePicker" styleClass="text-field" />
+            <Button fx:id="btnLoad" onAction="#onLoad" styleClass="btn-primary" text="Filter" />
+            <Button onAction="#onLoad" styleClass="btn-icon">
+                <graphic>
+                    <Label style="-fx-font-size: 16px; -fx-text-fill: -fx-theme-text-secondary;" text="↻" />
+                </graphic>
+                <tooltip>
+                    <Tooltip text="Refresh appointments list" />
+                </tooltip>
+            </Button>
+        </HBox>
+    </HBox>
+
+    <TableView fx:id="appointmentsTable" styleClass="modern-table" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colToken" prefWidth="60" text="Token" />
+            <TableColumn fx:id="colTime" prefWidth="120" text="Time" />
+            <TableColumn fx:id="colPatient" prefWidth="150" text="Patient Name" />
+            <TableColumn fx:id="colPhone" prefWidth="120" text="Phone" />
+            <TableColumn fx:id="colDoctor" prefWidth="120" text="Doctor Name" />
+            <TableColumn fx:id="colStatus" prefWidth="100" text="Status" />
+            <TableColumn fx:id="colPriority" prefWidth="80" text="Priority" />
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
+    </TableView>
+
+    <Pagination fx:id="pagination" maxPageIndicatorCount="5" pageCount="1" />
 </VBox>
+
 

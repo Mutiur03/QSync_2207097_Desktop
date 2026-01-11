@@ -184,6 +184,10 @@ public class AppointmentService {
         return appointmentDao.listByDate(date, limit, offset);
     }
 
+    public int getCountByDate(String date) {
+        return listByDate(date, 2000, 0).size();
+    }
+
     public List<Appointment> listByPatient(long patientId, int limit, int offset) {
         return appointmentDao.listByPatient(patientId, limit, offset);
     }

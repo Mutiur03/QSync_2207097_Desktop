@@ -84,6 +84,8 @@ public class AdminManageDoctorsController {
             private final HBox box = new HBox(8, editBtn, delBtn);
 
             {
+                editBtn.getStyleClass().add("btn-secondary");
+                delBtn.getStyleClass().add("btn-danger");
                 editBtn.setOnAction(e -> {
                     Doctor d = getTableView().getItems().get(getIndex());
                     onEditClicked(d);
