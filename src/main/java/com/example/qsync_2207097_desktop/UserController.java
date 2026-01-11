@@ -41,6 +41,7 @@ public class UserController {
     private UserHomeFragmentController homeController;
 
     private Node filesPane;
+    private UserFilesFragmentController filesController;
 
     private Node settingsPane;
 
@@ -57,7 +58,7 @@ public class UserController {
             homeController = homeLoader.getController();
             FXMLLoader filesLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("user/user-files-fragment.fxml")));
             javafx.scene.Parent filesRoot = filesLoader.load();
-            UserFilesFragmentController filesController = filesLoader.getController();
+            filesController = filesLoader.getController();
             FXMLLoader settingsLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("user/user-settings-fragment.fxml")));
             javafx.scene.Parent settingsRoot = settingsLoader.load();
             UserSettingsFragmentController settingsController = settingsLoader.getController();
@@ -98,54 +99,45 @@ public class UserController {
         Objects.requireNonNull(event);
         if (homeController != null) homeController.reload();
         showPane(homePane);
+        setActiveButton(btnHome);
     }
 
     @FXML
     public void showFiles(ActionEvent event) {
         Objects.requireNonNull(event);
+        if (filesController != null) filesController.reload();
         showPane(filesPane);
+        setActiveButton(btnFiles);
     }
 
     @FXML
     public void showSettings(ActionEvent event) {
         Objects.requireNonNull(event);
         showPane(settingsPane);
+        setActiveButton(btnSettings);
     }
 
     @FXML
     public void showBooking(ActionEvent event) {
-        if (contentStack == null) return;
-        if (bookingPane != null) {
-            showPane(bookingPane);
-        } else if (contentStack.getChildren().size() >= 4) {
-            Node bookingNode = contentStack.getChildren().get(3);
-            showPane(bookingNode);
-        }
+        Objects.requireNonNull(event);
+        showPane(bookingPane);
+        setActiveButton(btnBooking);
     }
 
     private void showPane(Node paneToShow) {
         if (contentStack == null) return;
         for (Node child : contentStack.getChildren()) {
-            boolean show = child == paneToShow;
+            boolean show = (child == paneToShow);
             child.setVisible(show);
             child.setManaged(show);
         }
-
-        try {
-            btnHome.getStyleClass().remove("active");
-            btnFiles.getStyleClass().remove("active");
-            btnSettings.getStyleClass().remove("active");
-            if (btnBooking != null) btnBooking.getStyleClass().remove("active");
-        } catch (Exception ignored) {}
-
-        if (paneToShow == homePane) addActive(btnHome);
-        else if (paneToShow == filesPane) addActive(btnFiles);
-        else if (paneToShow == settingsPane) addActive(btnSettings);
-        else if (paneToShow == bookingPane) addActive(btnBooking);
     }
 
-    private void addActive(Button btn) {
-        if (btn == null) return;
-        if (!btn.getStyleClass().contains("active")) btn.getStyleClass().add("active");
+    private void setActiveButton(Button activeBtn) {
+        btnHome.getStyleClass().remove("nav-button-active");
+        btnFiles.getStyleClass().remove("nav-button-active");
+        btnBooking.getStyleClass().remove("nav-button-active");
+        btnSettings.getStyleClass().remove("nav-button-active");
+        if (activeBtn != null) activeBtn.getStyleClass().add("nav-button-active");
     }
 }

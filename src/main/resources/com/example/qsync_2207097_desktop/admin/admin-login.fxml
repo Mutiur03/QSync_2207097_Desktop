@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx/25" stylesheets="@../user/log-reg.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.AdminController" styleClass="root">
-    <top>
-        <HBox alignment="TOP_RIGHT" spacing="8" styleClass="header">
-        </HBox>
-    </top>
+<StackPane xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.AdminController" styleClass="root" stylesheets="@../user/log-reg.css">
+    <VBox alignment="CENTER" styleClass="login-container">
+        <VBox alignment="CENTER" styleClass="card">
+            <VBox alignment="CENTER" spacing="8">
+                <Label styleClass="title" text="Admin Portal" />
+                <Label styleClass="subtitle" text="Secure management access for QSync." />
+            </VBox>
 
-    <center>
-        <VBox alignment="CENTER" spacing="6" VBox.vgrow="ALWAYS" BorderPane.alignment="CENTER" styleClass="login-container">
-            <VBox alignment="CENTER" spacing="10" styleClass="card">
-                <Label styleClass="title" text="Admin Sign in" />
+            <VBox spacing="15">
+                <VBox spacing="5">
+                    <Label styleClass="form-label" text="Admin Email" />
+                    <TextField fx:id="adminEmail" promptText="admin@example.com" styleClass="input" />
+                </VBox>
 
-                <GridPane alignment="CENTER" hgap="8" vgap="8" maxWidth="360" styleClass="login-grid">
-                    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                    <TextField fx:id="adminEmail" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <VBox spacing="5">
+                    <Label styleClass="form-label" text="Password" />
+                    <PasswordField fx:id="adminPassword" promptText="••••••••" styleClass="input" />
+                </VBox>
+            </VBox>
 
-                    <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                    <PasswordField fx:id="adminPassword" styleClass="input" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                </GridPane>
+            <Button maxWidth="Infinity" onAction="#adminSignIn" styleClass="login-btn" text="Sign in as Admin" />
 
-                <Button onAction="#adminSignIn" styleClass="login-btn" text="Sign in" />
-
-                <Label styleClass="muted" text="Use admin@example.com / admin123" />
+            <VBox alignment="CENTER" spacing="10">
+                <Label styleClass="muted" text="Default: admin@example.com / admin123" style="-fx-font-size: 10px;" />
+                <Hyperlink onAction="#openUserLogin" styleClass="muted-link" text="Back to User Login" />
             </VBox>
         </VBox>
-    </center>
-</BorderPane>
+    </VBox>
+</StackPane>

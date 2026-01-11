@@ -19,11 +19,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.util.Callback;
 import javafx.geometry.Pos;
-import javafx.scene.shape.Circle;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import java.io.IOException;
+
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
@@ -135,13 +134,16 @@ public class UserHomeFragmentController {
                     if (empty || status == null) {
                         setText(null);
                         setStyle("");
+                        getStyleClass().removeAll("status-badge", "status-completed", "status-cancelled", "status-waiting", "status-in_progress");
                     } else {
                         String s = status.replace('_', ' ');
                         setText(s.substring(0,1).toUpperCase() + s.substring(1));
-                        if (status.equals("in_progress")) setStyle("-fx-background-color: lightgreen; -fx-alignment: CENTER; -fx-padding: 4px;");
-                        else if (status.equals("waiting")) setStyle("-fx-background-color: lightgoldenrodyellow; -fx-alignment: CENTER; -fx-padding: 4px;");
-                        else if (status.equals("cancelled")) setStyle("-fx-background-color: lightgray; -fx-alignment: CENTER; -fx-padding: 4px;");
-                        else setStyle("");
+                        getStyleClass().add("status-badge");
+                        getStyleClass().removeAll("status-completed", "status-cancelled", "status-waiting", "status-in_progress");
+                        if (status.equals("in_progress")) getStyleClass().add("status-in_progress");
+                        else if (status.equals("waiting")) getStyleClass().add("status-waiting");
+                        else if (status.equals("cancelled")) getStyleClass().add("status-cancelled");
+                        else if (status.equals("completed")) getStyleClass().add("status-completed");
                     }
                 }
             });
@@ -283,18 +285,16 @@ public class UserHomeFragmentController {
             
             Label timeLabel = new Label("Scheduled at: " + a.getStartTime());
             timeLabel.getStyleClass().add("card-scheduled-time");
-            timeLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #2563eb; -fx-font-size: 14px;");
             
-            HBox tokenBox = new HBox(5);
-            tokenBox.setAlignment(Pos.CENTER_LEFT);
+            HBox bottomBox = new HBox(8);
+            bottomBox.setAlignment(Pos.CENTER_LEFT);
             Label tokenLabel = new Label("Token: " + (a.getToken() != null ? a.getToken() : "N/A"));
             tokenLabel.getStyleClass().add("card-token");
-            tokenBox.getChildren().add(tokenLabel);
+            bottomBox.getChildren().add(tokenLabel);
             
-            Circle statusDot = new Circle(4);
-            if ("in_progress".equals(a.getStatus())) statusDot.getStyleClass().add("status-in_progress");
-            else statusDot.getStyleClass().add("status-waiting");
-            tokenBox.getChildren().add(statusDot);
+            Label statusBadge = new Label(a.getStatus());
+            statusBadge.getStyleClass().addAll("status-badge", "status-" + a.getStatus());
+            bottomBox.getChildren().add(statusBadge);
 
             Button cancelBtn = new Button("Cancel");
             cancelBtn.getStyleClass().add("btn-danger");
@@ -308,12 +308,13 @@ public class UserHomeFragmentController {
                 }
             });
 
-            card.getChildren().addAll(nameLabel, timeLabel, tokenBox);
+            card.getChildren().addAll(nameLabel, timeLabel, bottomBox);
             
             if (a.getPriority() != null && !a.getPriority().isEmpty()) {
-                Label priorityLabel = new Label("Priority: " + a.getPriority());
-                priorityLabel.getStyleClass().add("card-token"); // reuse styling
-                priorityLabel.setStyle(priorityLabel.getStyle() + "; -fx-background-color: #fef3c7; -fx-text-fill: #92400e;");
+                Label priorityLabel = new Label(a.getPriority());
+                priorityLabel.getStyleClass().addAll("status-badge", "status-waiting");
+
+                priorityLabel.setStyle("-fx-font-size: 10px;");
                 card.getChildren().add(priorityLabel);
             }
 
@@ -326,16 +327,4 @@ public class UserHomeFragmentController {
         column.setStyle("-fx-alignment: CENTER;");
     }
 
-    @FXML
-    protected void onSignOut(ActionEvent event) {
-        if (parent != null) {
-            try {
-                parent.signOut(event);
-            } catch (IOException e) {
-                System.err.println("Sign out failed: " + e.getMessage());
-            }
-        } else {
-            SessionManager.clearSession();
-        }
-    }
 }

@@ -176,6 +176,13 @@ public class AdminController {
     }
 
     @FXML
+    protected void openUserLogin(ActionEvent event) throws IOException {
+        Parent loginRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("user/hello-view.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(loginRoot);
+    }
+
+    @FXML
     protected void signOut(ActionEvent event) throws IOException {
         SessionManager.clearSession();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

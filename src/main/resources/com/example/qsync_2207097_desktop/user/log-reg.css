@@ -1,116 +1,116 @@
-.input:hover {
-    -fx-border-color: #4facfe;
-}
-
-.choice-box {
-    -fx-background-color: white;
-    -fx-border-color: #ccc;
-    -fx-border-radius: 5px;
-    -fx-padding: 5px;
-    -fx-font-size: 14px;
-    -fx-font-family: 'Arial', sans-serif;
-}
-
-.choice-box:hover {
-    -fx-border-color: #4facfe;
-}
-
-.choice-box:focused {
-    -fx-border-color: #4facfe;
-    -fx-border-width: 2px;
-}
-
 .root {
-    -fx-background-color: #ffffff;
-    -fx-padding: 28;
-    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  -fx-theme-primary: #2563eb;
+  -fx-theme-primary-dark: #1e40af;
+  -fx-theme-bg-gradient: linear-gradient(to bottom right, #eff6ff, #f8fafc);
+  -fx-theme-text-primary: #1e293b;
+  -fx-theme-text-secondary: #64748b;
+  -fx-theme-border: #e2e8f0;
+
+  -fx-background: -fx-theme-bg-gradient;
+  -fx-padding: 0;
+  -fx-font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  -fx-font-size: 13px;
 }
 
 .header {
-    -fx-padding: 12 18 0 18;
+  -fx-padding: 15;
 }
 
 .logo-btn {
-    -fx-background-color: transparent;
-    -fx-cursor: hand;
+  -fx-background-color: rgba(255, 255, 255, 0.8);
+  -fx-background-radius: 10;
+  -fx-padding: 8;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.05), 8, 0, 0, 2);
+}
+.logo-btn:hover {
+  -fx-background-color: white;
+  -fx-translate-y: -1;
 }
 
 .login-container {
-    -fx-alignment: center;
-    -fx-padding: 14 20 24 20;
+  -fx-padding: 0;
 }
 
 .card {
-    -fx-background-color: #ffffff;
-    -fx-background-insets: 0;
-    -fx-background-radius: 12;
-    -fx-padding: 18 22 18 22;
-    -fx-border-color: rgba(16,24,40,0.06);
-    -fx-border-width: 1;
-    -fx-border-radius: 12;
-    -fx-effect: dropshadow(gaussian, rgba(2,6,23,0.08), 18, 0.08, 0, 6);
-    -fx-max-width: 380px;
-    -fx-min-width: 260px;
+  -fx-background-color: white;
+  -fx-background-radius: 16;
+  -fx-padding: 24;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.08), 20, 0, 0, 8);
+  -fx-max-width: 400;
+  -fx-spacing: 18;
 }
 
 .title {
-    -fx-text-fill: #0f1724;
-    -fx-font-size: 20px;
-    -fx-font-weight: 600;
+  -fx-font-size: 22px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-theme-text-primary;
 }
 
-.login-grid .label {
-    -fx-text-fill: rgba(15,23,36,0.85);
-    -fx-font-size: 12.5px;
+.subtitle {
+  -fx-font-size: 13px;
+  -fx-text-fill: -fx-theme-text-secondary;
+}
+
+.login-grid {
+  -fx-vgap: 12;
+  -fx-hgap: 12;
+}
+
+.form-label {
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-theme-text-secondary;
+  -fx-font-size: 12px;
 }
 
 .input {
-    -fx-background-color: #f3f4f6;
-    -fx-text-fill: #0f1724;
-    -fx-prompt-text-fill: rgba(15,23,36,0.45);
-    -fx-background-radius: 8;
-    -fx-border-radius: 8;
-    -fx-padding: 8 10 8 10;
-    -fx-border-color: transparent;
+  -fx-background-color: white;
+  -fx-border-color: -fx-theme-border;
+  -fx-border-radius: 8;
+  -fx-background-radius: 8;
+  -fx-padding: 8 12;
+  -fx-text-fill: -fx-theme-text-primary;
+  -fx-prompt-text-fill: #94a3b8;
 }
-
-
-
 .input:focused {
-    -fx-border-color: #7c3aed;
-    -fx-border-width: 1.5;
+  -fx-border-color: -fx-theme-primary;
+  -fx-border-width: 1.5;
 }
-
 
 .login-btn {
-    -fx-background-radius: 10;
-    -fx-text-fill: white;
-    -fx-font-weight: 600;
-    -fx-padding: 8 18 8 18;
-    -fx-background-color: #7c3aed;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(124,58,237,0.12), 8, 0.08, 0, 4);
+  -fx-background-color: -fx-theme-primary;
+  -fx-text-fill: white;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-background-radius: 8;
+  -fx-padding: 10 20;
+  -fx-cursor: hand;
+  -fx-min-width: 160;
 }
-
 .login-btn:hover {
-    -fx-opacity: 0.98;
-    -fx-translate-y: -1;
-}
-
-.muted {
-    -fx-text-fill: rgba(15,23,36,0.6);
-    -fx-font-size: 11px;
-    -fx-padding: 6 0 0 0;
+  -fx-background-color: -fx-theme-primary-dark;
+  -fx-translate-y: -1;
 }
 
 .muted-link {
-    -fx-text-fill: #7c3aed;
-    -fx-underline: true;
-    -fx-cursor: hand;
-    -fx-font-size: 12px;
+  -fx-text-fill: -fx-theme-primary;
+  -fx-underline: false;
+  -fx-font-weight: bold;
+  -fx-cursor: hand;
 }
 .muted-link:hover {
-    -fx-opacity: 0.85;
+  -fx-text-fill: -fx-theme-primary-dark;
 }
 
-
+.choice-box,
+.date-picker {
+  -fx-background-color: white;
+  -fx-border-color: -fx-theme-border;
+  -fx-border-radius: 8;
+  -fx-background-radius: 8;
+  -fx-padding: 6 10;
+}
+.choice-box:focused,
+.date-picker:focused {
+  -fx-border-color: -fx-theme-primary;
+}
