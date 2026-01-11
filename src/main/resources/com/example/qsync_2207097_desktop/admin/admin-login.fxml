@@ -32,7 +32,7 @@
             <Button maxWidth="Infinity" onAction="#adminSignIn" styleClass="login-btn" text="Sign in as Admin" />
 
             <VBox alignment="CENTER" spacing="10">
-                <Label styleClass="muted" text="Default: admin@example.com / admin123" style="-fx-font-size: 10px;" />
+<!--                <Label styleClass="muted" text="Default: admin@example.com / admin123" style="-fx-font-size: 10px;" />-->
                 <Hyperlink onAction="#openUserLogin" styleClass="muted-link" text="Back to User Login" />
             </VBox>
         </VBox>

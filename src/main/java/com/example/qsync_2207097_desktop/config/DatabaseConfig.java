@@ -53,8 +53,8 @@ public class DatabaseConfig {
             "    password_hash TEXT NOT NULL,\n" +
             "    created_at INTEGER NOT NULL DEFAULT (strftime('%s','now'))\n" +
             ");",
-            "INSERT INTO users (name, email, password_hash) VALUES ('Default User', 'mutiur5bb@gmail.com', '') ON CONFLICT(email) DO NOTHING",
-            "INSERT INTO admins (name, email, password_hash) VALUES ('Administrator', 'admin@example.com', '') ON CONFLICT(email) DO NOTHING",
+            "INSERT INTO users (name, email, password_hash) VALUES ('Mutiur Rahman', 'mutiur5bb@gmail.com', '') ON CONFLICT(email) DO NOTHING",
+            "INSERT INTO admins (name, email, password_hash) VALUES ('Administrator', 'admin@qsync.com', '') ON CONFLICT(email) DO NOTHING",
             "CREATE TABLE IF NOT EXISTS departments (\n" +
             "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
             "    name TEXT NOT NULL UNIQUE,\n" +
