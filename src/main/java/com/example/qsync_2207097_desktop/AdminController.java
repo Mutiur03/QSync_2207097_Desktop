@@ -2,8 +2,7 @@ package com.example.qsync_2207097_desktop;
 
 import com.example.qsync_2207097_desktop.admin.AdminHomeFragmentController;
 import com.example.qsync_2207097_desktop.admin.AdminUsersFragmentController;
-import com.example.qsync_2207097_desktop.admin.AdminSettingsFragmentController;
-import com.example.qsync_2207097_desktop.admin.AdminReportsFragmentController;
+
 import com.example.qsync_2207097_desktop.config.DatabaseConfig;
 import com.example.qsync_2207097_desktop.model.Admin;
 import com.example.qsync_2207097_desktop.service.AdminService;
@@ -41,11 +40,7 @@ public class AdminController {
     @FXML
     private Node usersPane;
 
-    @FXML
-    private Node settingsPane;
 
-    @FXML
-    private Node reportsPane;
 
     @FXML
     private Node departmentsPane;
@@ -59,11 +54,7 @@ public class AdminController {
     @FXML
     private javafx.scene.control.Button btnUsers;
 
-    @FXML
-    private javafx.scene.control.Button btnSettings;
 
-    @FXML
-    private javafx.scene.control.Button btnReports;
 
     @FXML
     private javafx.scene.control.Button btnDepartments;
@@ -75,15 +66,20 @@ public class AdminController {
     private javafx.scene.control.Button btnAppointments;
 
     @FXML
+    private javafx.scene.control.Button btnQueues;
+
+    @FXML
     private javafx.scene.control.Button btnSignOut;
 
 
     private Node appointmentsPane;
+    private Node queuesPane;
 
     private AdminService adminService;
 
     private com.example.qsync_2207097_desktop.admin.AdminDepartmentsFragmentController departmentsControllerRef;
     private com.example.qsync_2207097_desktop.admin.AdminManageDoctorsController doctorsControllerRef;
+    private com.example.qsync_2207097_desktop.admin.AdminQueuesFragmentController queuesControllerRef;
 
     private AdminService getAdminService() {
         if (adminService == null) adminService = new AdminService(new DatabaseConfig());
@@ -98,12 +94,7 @@ public class AdminController {
             FXMLLoader usersLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource( "admin/admin-users-fragment.fxml")));
             Parent usersRoot = usersLoader.load();
             AdminUsersFragmentController usersController = usersLoader.getController();
-            FXMLLoader settingsLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource( "admin/admin-settings-fragment.fxml")));
-            Parent settingsRoot = settingsLoader.load();
-            AdminSettingsFragmentController settingsController = settingsLoader.getController();
-            FXMLLoader reportsLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("admin/admin-reports-fragment.fxml")));
-            Parent reportsRoot = reportsLoader.load();
-            AdminReportsFragmentController reportsController = reportsLoader.getController();
+
             FXMLLoader departmentsLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("admin/admin-departments-fragment.fxml")));
             Parent departmentsRoot = departmentsLoader.load();
             departmentsControllerRef = departmentsLoader.getController();
@@ -120,29 +111,37 @@ public class AdminController {
             } catch (Exception ignored) {}
             if (homeController != null) homeController.setParent(this);
             if (usersController != null) usersController.setParent(this);
-            if (settingsController != null) settingsController.setParent(this);
-            if (reportsController != null) reportsController.setParent(this);
+
             if (departmentsControllerRef != null) departmentsControllerRef.setParent(this);
             if (doctorsControllerRef != null) doctorsControllerRef.setParent(this);
+            try {
+                FXMLLoader queuesLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("admin/admin-queues-fragment.fxml")));
+                Parent queuesRoot = queuesLoader.load();
+                queuesPane = queuesRoot;
+                queuesControllerRef = queuesLoader.getController();
+                if (queuesControllerRef != null) queuesControllerRef.setParent(this);
+                queuesRoot.setVisible(false);
+                queuesRoot.setManaged(false);
+                contentStack.getChildren().add(queuesRoot);
+            } catch (Exception ex) {
+                System.err.println("[AdminController] Failed to load queues fragment: " + ex);
+            }
+
             homeRoot.setVisible(true);
             homeRoot.setManaged(true);
             usersRoot.setVisible(false);
             usersRoot.setManaged(false);
-            settingsRoot.setVisible(false);
-            settingsRoot.setManaged(false);
-            reportsRoot.setVisible(false);
-            reportsRoot.setManaged(false);
+
             departmentsRoot.setVisible(false);
             departmentsRoot.setManaged(false);
             doctorsRoot.setVisible(false);
             doctorsRoot.setManaged(false);
 
-            contentStack.getChildren().addAll(homeRoot, usersRoot, settingsRoot, reportsRoot, departmentsRoot, doctorsRoot);
+            contentStack.getChildren().addAll(homeRoot, usersRoot, departmentsRoot, doctorsRoot);
 
             homePane = homeRoot;
             usersPane = usersRoot;
-            settingsPane = settingsRoot;
-            reportsPane = reportsRoot;
+
             departmentsPane = departmentsRoot;
             doctorsPane = doctorsRoot;
 
@@ -201,17 +200,7 @@ public class AdminController {
         showPane(usersPane);
     }
 
-    @FXML
-    public void showSettings(ActionEvent event) {
-        Objects.requireNonNull(event);
-        showPane(settingsPane);
-    }
 
-    @FXML
-    public void showReports(ActionEvent event) {
-        Objects.requireNonNull(event);
-        showPane(reportsPane);
-    }
 
     @FXML
     public void showDepartments(ActionEvent event) {
@@ -233,6 +222,14 @@ public class AdminController {
         showPane(appointmentsPane);
     }
 
+    @FXML
+    public void showQueues(ActionEvent event) {
+        showPane(queuesPane);
+        if (queuesControllerRef != null) {
+            queuesControllerRef.refreshQueues();
+        }
+    }
+
     public void notifyDepartmentsChanged() {
         try {
             if (doctorsControllerRef != null) doctorsControllerRef.loadDepartments();
@@ -250,20 +247,20 @@ public class AdminController {
         try {
             btnDashboard.getStyleClass().remove("active");
             btnUsers.getStyleClass().remove("active");
-            btnSettings.getStyleClass().remove("active");
-            btnReports.getStyleClass().remove("active");
+
             if (btnDepartments != null) btnDepartments.getStyleClass().remove("active");
             if (btnDoctors != null) btnDoctors.getStyleClass().remove("active");
             if (btnAppointments != null) btnAppointments.getStyleClass().remove("active");
+            if (btnQueues != null) btnQueues.getStyleClass().remove("active");
         } catch (Exception ignored) {}
 
         if (nodeToShow == homePane) addActive(btnDashboard);
         else if (nodeToShow == usersPane) addActive(btnUsers);
-        else if (nodeToShow == settingsPane) addActive(btnSettings);
-        else if (nodeToShow == reportsPane) addActive(btnReports);
+
         else if (nodeToShow == departmentsPane) addActive(btnDepartments);
         else if (nodeToShow == doctorsPane) addActive(btnDoctors);
         else if (nodeToShow == appointmentsPane) addActive(btnAppointments);
+        else if (nodeToShow == queuesPane) addActive(btnQueues);
     }
 
     private void addActive(javafx.scene.control.Button btn) {

@@ -99,6 +99,27 @@ public class SqliteAppointmentDao implements AppointmentDao {
     }
 
     @Override
+    public List<Appointment> listByDoctorAndDate(String doctorId, String date) {
+        String sql = "SELECT a.id, a.patient_id, a.patient_name, a.patient_phone, a.date, a.start_time, a.end_time, a.start_ts, a.end_ts, a.status, a.notes, a.priority, a.doctor_id, a.department_id, a.token, a.created_at, a.updated_at, d.name AS doctor_name " +
+                     "FROM appointments a " +
+                     "LEFT JOIN doctors d ON a.doctor_id = d.id " +
+                     "WHERE a.doctor_id = ? AND a.date = ? AND a.status != 'cancelled' ORDER BY a.token ASC";
+        List<Appointment> list = new ArrayList<>();
+        try (Connection conn = dbConfig.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, doctorId);
+            ps.setString(2, date);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(mapRow(rs));
+                }
+            }
+            return list;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public List<Appointment> listByPatient(long patientId, int limit, int offset) {
         String sql = "SELECT a.id, a.patient_id, a.patient_name, a.patient_phone, a.date, a.start_time, a.end_time, a.start_ts, a.end_ts, a.status, a.notes, a.priority, a.doctor_id, a.department_id, a.token, a.created_at, a.updated_at, d.name AS doctor_name " +
                      "FROM appointments a " +

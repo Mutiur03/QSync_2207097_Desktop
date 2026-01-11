@@ -232,3 +232,19 @@
     -fx-pref-width: 180;
   }
 }
+
+.department-label {
+  -fx-text-fill: -fx-theme-primary;
+}
+
+.tree-cell:selected .department-label {
+  -fx-text-fill: white;
+}
+
+.doctor-label {
+  -fx-text-fill: #334155;
+}
+
+.tree-cell:selected .doctor-label {
+  -fx-text-fill: white;
+}

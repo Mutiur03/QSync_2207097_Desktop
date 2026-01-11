@@ -90,17 +90,17 @@ public class DatabaseConfig {
             "    updated_at INTEGER,\n" +
             "    CHECK (start_ts < end_ts)\n" +
             ");",
-            "INSERT OR IGNORE INTO departments (name) VALUES ('Cardiology')",
-            "INSERT OR IGNORE INTO doctors (department_id, name) SELECT id, 'Mutiur Rahman' FROM departments WHERE name = 'Cardiology'",
+//            "INSERT OR IGNORE INTO departments (name) VALUES ('Cardiology')",
+//            "INSERT OR IGNORE INTO doctors (department_id, name) SELECT id, 'Mutiur Rahman' FROM departments WHERE name = 'Cardiology'",
         };
 
         try (Statement stmt = conn.createStatement()) {
             for (String sql : sqlCommands) {
                 stmt.execute(sql);
             }
-            try {
-                stmt.execute("ALTER TABLE appointments ADD COLUMN priority TEXT");
-            } catch (SQLException ignored) {}
+//            try {
+//                stmt.execute("ALTER TABLE appointments ADD COLUMN priority TEXT");
+//            } catch (SQLException ignored) {}
         }
     }
 }

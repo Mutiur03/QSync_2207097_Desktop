@@ -15,8 +15,6 @@ import javafx.beans.binding.Bindings;
 
 public class UserSettingsFragmentController {
 
-    private UserController parent;
-
     @FXML
     private TextField nameField;
 
@@ -63,7 +61,6 @@ public class UserSettingsFragmentController {
     private User currentUser;
 
     public void setParent(UserController parent) {
-        this.parent = parent;
     }
 
     @FXML
@@ -151,6 +148,10 @@ public class UserSettingsFragmentController {
             saveProfileButton.setDisable(false);
             boolean ok = task.getValue();
             if (ok) {
+                String currentRole = SessionManager.getRole();
+                if (currentRole != null) {
+                    SessionManager.saveSession(currentRole, email);
+                }
                 profileMessageLabel.setText("Profile saved");
                 loadCurrentUser();
             } else {
@@ -196,7 +197,7 @@ public class UserSettingsFragmentController {
                     String salt = PasswordUtils.generateSalt();
                     String hash = PasswordUtils.hashPassword(nw, salt);
                     String stored = salt + "$" + hash;
-                    int updated = userService.updatePasswordByEmail(email, stored);
+                    int updated = userService.updatePasswordByEmail(u.getEmail(), stored);
                     return updated > 0;
                 } finally {
                     java.util.Arrays.fill(current, '\0');
@@ -219,7 +220,9 @@ public class UserSettingsFragmentController {
         });
         task.setOnFailed(ev -> {
             changePasswordButton.setDisable(false);
-            passwordMessageLabel.setText("Failed to change password");
+            Throwable ex = task.getException();
+            passwordMessageLabel.setText("Failed: " + (ex != null ? ex.getMessage() : "Unknown error"));
+            if (ex != null) ex.printStackTrace();
         });
         new Thread(task).start();
     }
@@ -229,6 +232,6 @@ public class UserSettingsFragmentController {
     }
 
     private void clearPasswordMessage() {
-        Platform.runLater(() -> passwordMessageLabel.setText(""));
+        passwordMessageLabel.setText("");
     }
 }

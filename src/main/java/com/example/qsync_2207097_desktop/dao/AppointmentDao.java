@@ -9,6 +9,7 @@ public interface AppointmentDao {
     int updateStatus(long appointmentId, String status);
     Appointment getById(long id);
     List<Appointment> listByDate(String date, int limit, int offset);
+    List<Appointment> listByDoctorAndDate(String doctorId, String date);
     List<Appointment> listByPatient(long patientId, int limit, int offset);
     boolean hasConflict(long requestedStartTs, long requestedEndTs);
     int delete(long id);

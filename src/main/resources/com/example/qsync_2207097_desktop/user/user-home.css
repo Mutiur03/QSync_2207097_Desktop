@@ -243,7 +243,6 @@
   -fx-text-fill: white;
 }
 
-/* Hide the radio circle */
 .priority-button .radio {
   -fx-padding: 0;
   -fx-shape: "";

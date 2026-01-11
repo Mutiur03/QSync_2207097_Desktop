@@ -18,8 +18,7 @@
                 <Button fx:id="btnDepartments" onAction="#showDepartments" styleClass="nav-button" text="Departments" />
                 <Button fx:id="btnDoctors" onAction="#showDoctors" styleClass="nav-button" text="Manage Doctors" />
                 <Button fx:id="btnAppointments" onAction="#showAppointments" styleClass="nav-button" text="Appointments" />
-                <Button fx:id="btnReports" onAction="#showReports" styleClass="nav-button" text="System Reports" />
-                <Button fx:id="btnSettings" onAction="#showSettings" styleClass="nav-button" text="Settings" />
+                <Button fx:id="btnQueues" onAction="#showQueues" styleClass="nav-button" text="Live Queues" />
             </VBox>
 
             <Button fx:id="btnSignOut" onAction="#signOut" styleClass="signout-button" text="Sign out" />

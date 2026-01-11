@@ -69,14 +69,6 @@ public class AdminHomeFragmentController {
         if (parent != null) parent.showDoctors(null);
     }
 
-    @FXML
-    protected void onGenerateReport() {
-        if (parent != null) parent.showReports(null);
-    }
 
-    @FXML
-    protected void onShowSettings() {
-        if (parent != null) parent.showSettings(null);
-    }
 }
 

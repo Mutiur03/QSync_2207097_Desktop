@@ -44,8 +44,7 @@
             <Label styleClass="h2" text="Quick Actions" />
             <FlowPane hgap="15" vgap="15">
                 <Button onAction="#onAddDoctor" styleClass="btn-primary" text="Add New Doctor" />
-                <Button onAction="#onGenerateReport" styleClass="btn-primary" text="Generate Report" />
-                <Button onAction="#onShowSettings" styleClass="btn-primary" text="System Settings" />
+
             </FlowPane>
         </VBox>
     </VBox>

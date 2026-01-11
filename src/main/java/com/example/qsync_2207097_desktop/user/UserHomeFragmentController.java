@@ -27,6 +27,8 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 public class UserHomeFragmentController {
 
@@ -65,6 +67,13 @@ public class UserHomeFragmentController {
 
     @FXML
     private FlowPane todayCardsContainer;
+
+    @FXML
+    private HBox undoContainer;
+
+    private Long lastCancelledId;
+    private String lastCancelledStatus;
+    private PauseTransition undoTimer;
 
     private UserController parent;
     private AppointmentService appointmentService;
@@ -160,8 +169,10 @@ public class UserHomeFragmentController {
                                 Appointment ap = getTableView().getItems().get(getIndex());
                                 if (ap != null) {
                                     try {
+                                        String oldStatus = ap.getStatus();
                                         appointmentService.changeStatus(ap.getId(), "cancelled");
                                         reload();
+                                        showUndo(ap.getId(), oldStatus);
                                     } catch (Exception ex) {
                                         Alert a = new Alert(Alert.AlertType.ERROR, "Failed to cancel: " + ex.getMessage());
                                         a.showAndWait();
@@ -301,8 +312,10 @@ public class UserHomeFragmentController {
             cancelBtn.setMaxWidth(Double.MAX_VALUE);
             cancelBtn.setOnAction(e -> {
                 try {
+                    String oldStatus = a.getStatus();
                     appointmentService.changeStatus(a.getId(), "cancelled");
                     reload();
+                    showUndo(a.getId(), oldStatus);
                 } catch (Exception ex) {
                     new Alert(Alert.AlertType.ERROR, "Failed to cancel: " + ex.getMessage()).showAndWait();
                 }
@@ -325,6 +338,40 @@ public class UserHomeFragmentController {
 
     private void centerAlignColumn(TableColumn<?, ?> column) {
         column.setStyle("-fx-alignment: CENTER;");
+    }
+
+    @FXML
+    public void onUndo(ActionEvent event) {
+        if (lastCancelledId != null && appointmentService != null) {
+            try {
+                appointmentService.changeStatus(lastCancelledId, lastCancelledStatus != null ? lastCancelledStatus : "waiting");
+                reload();
+                closeUndo(null);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    public void closeUndo(ActionEvent event) {
+        if (undoContainer != null) {
+            undoContainer.setVisible(false);
+            undoContainer.setManaged(false);
+        }
+    }
+
+    private void showUndo(Long aid, String oldStatus) {
+        this.lastCancelledId = aid;
+        this.lastCancelledStatus = oldStatus;
+        if (undoContainer != null) {
+            undoContainer.setVisible(true);
+            undoContainer.setManaged(true);
+            if (undoTimer != null) undoTimer.stop();
+            undoTimer = new PauseTransition(Duration.seconds(10));
+            undoTimer.setOnFinished(e -> closeUndo(null));
+            undoTimer.play();
+        }
     }
 
 }

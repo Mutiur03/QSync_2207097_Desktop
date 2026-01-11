@@ -81,6 +81,7 @@ public class UserController {
             bookingPane = bookingRoot;
 
             showPane(homePane);
+            setActiveButton(btnHome);
          } catch (Exception ex) {
              LOGGER.log(Level.SEVERE, "Failed to load user fragments", ex);
          }
