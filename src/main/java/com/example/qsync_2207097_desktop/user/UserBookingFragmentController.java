@@ -15,9 +15,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class UserBookingFragmentController {
@@ -43,8 +40,6 @@ public class UserBookingFragmentController {
     private final AppointmentService appointmentService;
     private final DepartmentService departmentService;
     private final DoctorService doctorService;
-    private UserService userService;
-
     public UserBookingFragmentController() {
         DatabaseConfig cfg = new DatabaseConfig();
         appointmentService = new AppointmentService(cfg);
@@ -52,10 +47,6 @@ public class UserBookingFragmentController {
         doctorService = new DoctorService(cfg);
     }
 
-    private UserService getUserService() {
-        if (userService == null) userService = new UserService(new DatabaseConfig());
-        return userService;
-    }
 
     @FXML
     public void initialize() {
@@ -124,29 +115,14 @@ public class UserBookingFragmentController {
             LocalDate ld = datePicker.getValue();
             if (ld == null) { Alert a = new Alert(Alert.AlertType.ERROR, "Please select a date"); a.showAndWait(); return; }
 
-            LocalTime st;
-            int durationMinutes = selDoc.getVgTimeMinutes() > 0 ? selDoc.getVgTimeMinutes() : 30;
-            DateTimeFormatter tf = DateTimeFormatter.ofPattern("HH:mm");
-            try {
-                if (selDoc.getStartTime() != null && !selDoc.getStartTime().trim().isEmpty()) {
-                    st = LocalTime.parse(selDoc.getStartTime(), tf);
-                } else {
-                    st = LocalTime.of(9, 0);
-                }
-            } catch (Exception e) {
-                st = LocalTime.of(9,0);
-            }
-            LocalTime et = st.plusMinutes(durationMinutes);
-            long startTs = ld.atTime(st).toEpochSecond(ZoneOffset.UTC);
-            long endTs = ld.atTime(et).toEpochSecond(ZoneOffset.UTC);
-
             Long patientId = null;
             String patientName = "Guest";
             String patientPhone = "";
             String email = SessionManager.getEmail();
             if (email != null) {
                 try {
-                    User current = getUserService().getByEmail(email);
+                    UserService us = new UserService(new DatabaseConfig());
+                    User current = us.getByEmail(email);
                     if (current != null) {
                         patientId = current.getId();
                         patientName = current.getName() == null ? patientName : current.getName();
@@ -160,15 +136,11 @@ public class UserBookingFragmentController {
             ap.setPatientName(patientName);
             ap.setPatientPhone(patientPhone);
             ap.setDate(ld.toString());
-            ap.setStartTime(st.toString());
-            ap.setEndTime(et.toString());
-            ap.setStartTs(startTs);
-            ap.setEndTs(endTs);
             ap.setStatus("waiting");
             ap.setDoctorId(selDoc.getId());
             ap.setDepartmentId(selDept.getId());
-            String notes = "priority:" + (priority == null ? "normal" : priority) + ";symptoms:" + (symptoms == null ? "" : symptoms.replaceAll(";", ","));
-            ap.setNotes(notes);
+            ap.setPriority(priority);
+            ap.setNotes(symptoms);
 
             long id = appointmentService.bookAppointmentTransactional(ap);
             if (id > 0) {

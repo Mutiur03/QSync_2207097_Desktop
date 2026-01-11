@@ -85,6 +85,7 @@ public class DatabaseConfig {
             "    end_ts INTEGER NOT NULL,\n" +
             "    status TEXT NOT NULL DEFAULT 'waiting',\n" +
             "    notes TEXT,\n" +
+            "    priority TEXT,\n" +
             "    created_at INTEGER NOT NULL DEFAULT (strftime('%s','now')),\n" +
             "    updated_at INTEGER,\n" +
             "    CHECK (start_ts < end_ts)\n" +
@@ -97,6 +98,9 @@ public class DatabaseConfig {
             for (String sql : sqlCommands) {
                 stmt.execute(sql);
             }
+            try {
+                stmt.execute("ALTER TABLE appointments ADD COLUMN priority TEXT");
+            } catch (SQLException ignored) {}
         }
     }
 }

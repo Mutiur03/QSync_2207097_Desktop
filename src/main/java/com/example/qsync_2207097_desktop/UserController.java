@@ -38,6 +38,7 @@ public class UserController {
     private StackPane contentStack;
 
     private Node homePane;
+    private UserHomeFragmentController homeController;
 
     private Node filesPane;
 
@@ -53,7 +54,7 @@ public class UserController {
          try {
             FXMLLoader homeLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("user/user-home-fragment.fxml")));
             javafx.scene.Parent homeRoot = homeLoader.load();
-            UserHomeFragmentController homeController = homeLoader.getController();
+            homeController = homeLoader.getController();
             FXMLLoader filesLoader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("user/user-files-fragment.fxml")));
             javafx.scene.Parent filesRoot = filesLoader.load();
             UserFilesFragmentController filesController = filesLoader.getController();
@@ -95,6 +96,7 @@ public class UserController {
     @FXML
     public void showHome(ActionEvent event) {
         Objects.requireNonNull(event);
+        if (homeController != null) homeController.reload();
         showPane(homePane);
     }
 

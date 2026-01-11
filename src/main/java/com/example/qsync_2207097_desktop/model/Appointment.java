@@ -17,6 +17,7 @@ public class Appointment {
     private String doctorId;
     private Long departmentId;
     private Integer token;
+    private String priority;
 
     public Appointment() {}
 
@@ -67,4 +68,7 @@ public class Appointment {
 
     public Integer getToken() { return token; }
     public void setToken(Integer token) { this.token = token; }
+
+    public String getPriority() { return priority; }
+    public void setPriority(String priority) { this.priority = priority; }
 }
