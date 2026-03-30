@@ -1,0 +1,116 @@
+.root {
+  -fx-theme-primary: #2563eb;
+  -fx-theme-primary-dark: #1e40af;
+  -fx-theme-bg-gradient: linear-gradient(to bottom right, #eff6ff, #f8fafc);
+  -fx-theme-text-primary: #1e293b;
+  -fx-theme-text-secondary: #64748b;
+  -fx-theme-border: #e2e8f0;
+
+  -fx-background: -fx-theme-bg-gradient;
+  -fx-padding: 0;
+  -fx-font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  -fx-font-size: 13px;
+}
+
+.header {
+  -fx-padding: 15;
+}
+
+.logo-btn {
+  -fx-background-color: rgba(255, 255, 255, 0.8);
+  -fx-background-radius: 10;
+  -fx-padding: 8;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.05), 8, 0, 0, 2);
+}
+.logo-btn:hover {
+  -fx-background-color: white;
+  -fx-translate-y: -1;
+}
+
+.login-container {
+  -fx-padding: 0;
+}
+
+.card {
+  -fx-background-color: white;
+  -fx-background-radius: 16;
+  -fx-padding: 24;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.08), 20, 0, 0, 8);
+  -fx-max-width: 400;
+  -fx-spacing: 18;
+}
+
+.title {
+  -fx-font-size: 22px;
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-theme-text-primary;
+}
+
+.subtitle {
+  -fx-font-size: 13px;
+  -fx-text-fill: -fx-theme-text-secondary;
+}
+
+.login-grid {
+  -fx-vgap: 12;
+  -fx-hgap: 12;
+}
+
+.form-label {
+  -fx-font-weight: bold;
+  -fx-text-fill: -fx-theme-text-secondary;
+  -fx-font-size: 12px;
+}
+
+.input {
+  -fx-background-color: white;
+  -fx-border-color: -fx-theme-border;
+  -fx-border-radius: 8;
+  -fx-background-radius: 8;
+  -fx-padding: 8 12;
+  -fx-text-fill: -fx-theme-text-primary;
+  -fx-prompt-text-fill: #94a3b8;
+}
+.input:focused {
+  -fx-border-color: -fx-theme-primary;
+  -fx-border-width: 1.5;
+}
+
+.login-btn {
+  -fx-background-color: -fx-theme-primary;
+  -fx-text-fill: white;
+  -fx-font-weight: bold;
+  -fx-font-size: 14px;
+  -fx-background-radius: 8;
+  -fx-padding: 10 20;
+  -fx-cursor: hand;
+  -fx-min-width: 160;
+}
+.login-btn:hover {
+  -fx-background-color: -fx-theme-primary-dark;
+  -fx-translate-y: -1;
+}
+
+.muted-link {
+  -fx-text-fill: -fx-theme-primary;
+  -fx-underline: false;
+  -fx-font-weight: bold;
+  -fx-cursor: hand;
+}
+.muted-link:hover {
+  -fx-text-fill: -fx-theme-primary-dark;
+}
+
+.choice-box,
+.date-picker {
+  -fx-background-color: white;
+  -fx-border-color: -fx-theme-border;
+  -fx-border-radius: 8;
+  -fx-background-radius: 8;
+  -fx-padding: 6 10;
+}
+.choice-box:focused,
+.date-picker:focused {
+  -fx-border-color: -fx-theme-primary;
+}

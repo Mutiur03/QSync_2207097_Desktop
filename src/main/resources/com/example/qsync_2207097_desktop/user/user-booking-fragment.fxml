@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.user.UserBookingFragmentController">
+    <VBox spacing="30" styleClass="content-padding">
+        <VBox spacing="8">
+            <Label styleClass="h1" text="Book an Appointment" />
+            <Label styleClass="muted" text="Choose your preferred doctor and schedule" />
+        </VBox>
+
+        <GridPane hgap="30" vgap="20">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            
+            <children>
+                <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label styleClass="form-label" text="Department" />
+                    <ComboBox fx:id="departmentCombo" maxWidth="Infinity" promptText="Select department" />
+                </VBox>
+
+                <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label styleClass="form-label" text="Doctor" />
+                    <ComboBox fx:id="doctorCombo" maxWidth="Infinity" promptText="Select doctor" />
+                </VBox>
+
+                <VBox spacing="8" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label styleClass="form-label" text="Preferred Date" />
+                    <DatePicker fx:id="datePicker" maxWidth="Infinity" />
+                </VBox>
+
+                <VBox spacing="8" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label styleClass="form-label" text="Priority" />
+                    <HBox spacing="10">
+                        <fx:define>
+                            <ToggleGroup fx:id="priorityGroup" />
+                        </fx:define>
+                        <RadioButton fx:id="normalPriority" styleClass="priority-button, priority-normal" text="Normal" toggleGroup="$priorityGroup" selected="true" />
+                        <RadioButton fx:id="urgentPriority" styleClass="priority-button, priority-urgent" text="Urgent" toggleGroup="$priorityGroup" />
+                        <RadioButton fx:id="emergencyPriority" styleClass="priority-button, priority-emergency" text="Emergency" toggleGroup="$priorityGroup" />
+                    </HBox>
+                </VBox>
+                
+                <VBox spacing="8" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                    <Label styleClass="form-label" text="Symptoms / Notes" />
+                    <TextArea fx:id="symptomsField" prefRowCount="5" promptText="Briefly describe your symptoms" />
+                </VBox>
+            </children>
+        </GridPane>
+
+        <HBox alignment="CENTER_RIGHT" spacing="15">
+            <Button fx:id="btnBook" onAction="#onBook" styleClass="btn-primary" text="Confirm and Book Now" />
+        </HBox>
+    </VBox>
+</ScrollPane>

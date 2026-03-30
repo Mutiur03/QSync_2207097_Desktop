@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<VBox spacing="20" styleClass="content-padding" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.qsync_2207097_desktop.admin.AdminDepartmentsFragmentController">
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <VBox spacing="5" HBox.hgrow="ALWAYS">
+            <Label styleClass="h1" text="Departments" />
+            <Label styleClass="muted" text="Manage hospital specialization areas and descriptions." />
+        </VBox>
+        <Button fx:id="btnAdd" onAction="#onAddClicked" styleClass="btn-primary" text="+ Add Department" />
+    </HBox>
+
+    <TableView fx:id="departmentsTable" styleClass="modern-table" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colName" prefWidth="200" text="Department Name" />
+            <TableColumn fx:id="colDescription" prefWidth="350" text="Description" />
+            <TableColumn fx:id="colActions" prefWidth="150" text="Actions" />
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
+    </TableView>
+</VBox>
+
+

@@ -1,0 +1,22 @@
+# Build
+target/
+build/
+out/
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Database
+qsync.db
+
+# Misc
+*.log
+.mvn/wrapper/maven-wrapper.jar
